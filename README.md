@@ -46,6 +46,21 @@ The configuration uses a variety of plugins to enhance Neovim's functionality. H
 
 The configuration also includes setup for various Language Server Protocols (LSPs) to provide features like autocompletion, formatting, and linting for various programming languages.
 
+# System Dependencies
+
+This Neovim configuration requires several system dependencies to function correctly. Here's a list of the required dependencies:
+
+1. **Neovim**: You should be running Neovim v0.9.0 or later.
+2. **Git**: Many Neovim plugins are hosted on GitHub and are installed via Git. Make sure you have Git installed and it's at least version 2.19.0 for partial clones support.
+3. **Python**: Some plugins may require Python and associated package manager pip. Also, certain Python packages might be needed depending on the plugins you use. For example, `autopep8`, `black`, and `isort` for Python formatting and linting.
+4. **Node.js and npm**: If you're using any plugins that are written in JavaScript or TypeScript, or that provide features like JSON or TypeScript language servers, you'll need Node.js and npm (Node Package Manager).
+5. **Rust**: If you're using any plugins that are written in Rust or that provide features like Rust language server, you'll need Rust and its package manager Cargo.
+6. **Go**: If you're using any plugins that are written in Go or that provide features like Go language server, you'll need Go.
+7. **ShellCheck**: If you're using any plugins for shell script linting, you might need ShellCheck.
+8. **CMake and build-essential**: These are required for building some plugins from source.
+9. **FUSE libraries**: These are required for some plugins.
+10. **A Nerd Font**: Some plugins that add icons to Neovim (like `nvim-web-devicons`) require a Nerd Font to be installed.
+
 ## Usage
 
 To use this configuration, clone this repository to your Neovim configuration directory and install the required plugins.
