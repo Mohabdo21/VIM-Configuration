@@ -46,7 +46,7 @@ The configuration uses a variety of plugins to enhance Neovim's functionality. H
 
 The configuration also includes setup for various Language Server Protocols (LSPs) to provide features like autocompletion, formatting, and linting for various programming languages.
 
-# System Dependencies
+## System Dependencies
 
 This Neovim configuration requires several system dependencies to function correctly. Here's a list of the required dependencies:
 
