@@ -8,6 +8,9 @@ return {
 			"coc-tsserver",
 			"coc-eslint",
 			"coc-prettier",
+			"coc-clangd",
+			"coc-ltex",
+			"coc-pyright",
 		}
 
 		vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", { noremap = true, silent = true })
