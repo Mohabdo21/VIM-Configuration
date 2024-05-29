@@ -78,6 +78,10 @@ return {
 		--     },
 		--   },
 		-- })
+		local function clock()
+			return "🕒 " .. os.date("%H:%M")
+		end
+
 		lualine.setup({
 			options = {
 				theme = my_lualine_theme,
@@ -111,11 +115,19 @@ return {
 				lualine_b = {},
 				lualine_c = { "filename" },
 				lualine_x = { "location" },
-				lualine_y = {},
+				lualine_y = { clock },
 				lualine_z = {},
 			},
 			tabline = {},
 			extensions = { "fugitive" },
 		})
+		vim.cmd([[
+			augroup ClockUpdate
+			autocmd!
+			autocmd CursorHold,CursorHoldI * lua vim.cmd('redrawstatus!')
+			augroup END
+		]])
+
+		vim.o.updatetime = 1000
 	end,
 }
