@@ -17,30 +17,36 @@ The configuration is organized as follows:
 
 The configuration uses a variety of plugins to enhance Neovim's functionality. Here are some of the key plugins:
 
-- `alpha-nvim`: A start screen plugin.
-- `auto-session`: A session management plugin.
-- `bufferline`: A plugin for enhanced buffer line.
-- `colorizer`: A plugin for colorizing color codes.
-- `colorscheme`: A plugin for managing colorschemes.
-- `comment`: A plugin for easy code commenting.
-- `dressing`: A plugin for code dressing.
-- `formatting`: A plugin for code formatting.
-- `gitsigns`: A plugin for showing git diff signs.
-- `harpoon`: A plugin for navigation and terminal management.
-- `lazygit`: A plugin for using lazygit in Neovim.
-- `linting`: A plugin for linting code.
-- `lualine`: A plugin for a fancy status line.
-- `nvim-autopairs`: A plugin for auto pairing of brackets and quotes.
-- `nvim-cmp`: A plugin for autocompletion.
-- `nvim-surround`: A plugin for dealing with surroundings in Neovim.
-- `nvim-tree`: A plugin for file explorer.
-- `nvim-treesitter`: A plugin for incremental parsing.
-- `nvim-web-devicons`: A plugin for file type icons.
-- `substitute`: A plugin for enhanced substitute command.
-- `telescope`: A plugin for fuzzy finding and picking things.
-- `todo-comments`: A plugin for TODO comments.
-- `vim-maximizer`: A plugin for maximizing and minimizing windows.
-- `which-key`: A plugin for keybindings cheatsheet.
+- `alpha-nvim.lua`: Alpha Nvim is a start screen plugin for Neovim.
+- `auto-session.lua`: Auto Session is a plugin that allows you to save and load your Neovim sessions automatically.
+- `bufferline.lua`: Bufferline is a plugin that provides a tab-like interface for managing buffers.
+- `coc.lua`: Conquer of Completion (CoC) is a powerful autocompletion plugin with language server protocol support.
+- `colorizer.lua`: Colorizer is a plugin that colorizes color codes in your code.
+- `colorscheme.lua`: This file is used to configure the colorscheme of your Neovim.
+- `comment.lua`: This plugin provides functionalities to comment and uncomment lines of code.
+- `dressing.lua`: Dressing is a plugin that helps to manage and navigate between different windows in Neovim.
+- `formatting.lua`: This plugin provides code formatting capabilities.
+- `friendly-snippets.lua`: Friendly Snippets is a plugin that provides a collection of snippets for various programming languages.
+- `gitsigns.lua`: GitSigns is a plugin that shows git diff markers in the sign column and stages changes via the buffer.
+- `harpoon.lua`: Harpoon is a plugin that provides mark and navigation functionalities.
+- `lazygit.lua`: LazyGit is a simple terminal UI for git commands.
+- `linting.lua`: This plugin provides linting capabilities in Neovim.
+- `lsp`: This directory contains configurations for the Language Server Protocol (LSP), which provides features like autocompletion, go to definition, and hover documentation.
+- `lua-snip.lua`: Lua Snip is a fast snippet engine for Neovim.
+- `lualine.lua`: Lualine is a lightweight and configurable status line plugin for Neovim.
+- `neogen.lua`: Neogen is a plugin that helps you generate JSDoc comments.
+- `nvim-autopairs.lua`: Nvim Autopairs is a plugin that automatically pairs brackets, quotes, etc.
+- `nvim-cmp.lua`: Nvim Cmp is an autocompletion plugin for Neovim.
+- `nvim-surround.lua`: Nvim Surround is a plugin that provides functionalities to deal with pairs of "surroundings".
+- `nvim-tree.lua`: Nvim Tree is a file explorer tree for Neovim.
+- `nvim-treesitter-text-objects.lua`: This plugin provides text objects based on the Treesitter AST.
+- `nvim-treesitter.lua`: Nvim Treesitter is a plugin that provides syntax highlighting and other features based on the Treesitter parsing library.
+- `nvim-web-devicons.lua`: Nvim Web Devicons is a plugin that provides icons for file types.
+- `substitute.lua`: This plugin provides functionalities to substitute text.
+- `telescope.lua`: Telescope is a highly extendable fuzzy finder over lists.
+- `todo-comments.lua`: Todo Comments is a plugin that provides functionalities to manage TODO comments.
+- `vim-maximizer.lua`: Vim Maximizer is a plugin that maximizes and minimizes windows in Vim.
+- `which-key.lua`: Which Key is a plugin that displays available keybindings in popup menu.
 
 ## LSP
 
