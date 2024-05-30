@@ -3,6 +3,8 @@ return {
 
 	"xiyaowong/transparent.nvim",
 
+	"jay-babu/mason-null-ls.nvim",
+
 	"nvim-lua/plenary.nvim", -- lua functions that many plugins use
 
 	"christoomey/vim-tmux-navigator", -- tmux & split window navigation

@@ -19,14 +19,19 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black", "autopep8" },
-				c = { "sbdchd/neoformat" },
-				bash = { "beautysh" },
+				python = { "isort", "black" },
+				c = { "clang-format" },
+				bash = { "sbdchd/neoformat" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
 				timeout_ms = 1000,
+			},
+			formatter_configs = {
+				["clang-format"] = {
+					style = "{ BasedOnStyle: Google, IndentWidth: 4 }",
+				},
 			},
 		})
 
