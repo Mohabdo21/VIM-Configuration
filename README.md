@@ -127,6 +127,7 @@ Below are commands to install common dependencies on Ubuntu:
 
 ```bash
 # Neovim
+sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 sudo apt install neovim
 
@@ -135,21 +136,19 @@ sudo apt install git
 
 # Python and pip
 sudo apt install python3 python3-pip
-pip3 install autopep8 black isort pylint
+pip3 install --user autopep8 black isort pynvim
 
 # Node.js and npm
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y nodejs
-npm install -g neovim prettier eslint typescript typescript-language-server
+npm install -g neovim
 
 # Rust and Cargo
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
-cargo install rustfmt
 
 # Go
-sudo snap install go --classic
-go get -u golang.org/x/tools/cmd/goimports golang.org/x/tools/gopls
+sudo apt install golang
 
 # ShellCheck
 sudo apt install shellcheck
@@ -163,11 +162,24 @@ sudo apt install libfuse2
 # Ripgrep
 sudo apt install ripgrep
 
+# fzf
+sudo apt install fzf
+
+# bat
+sudo apt install bat
+
 # fd
 sudo apt install fd-find
 
-# Nerd Font (example: FiraCode)
-sudo apt install fonts-firacode
+# Universal Ctags
+sudo apt install universal-ctags
+
+# Nerd Font (example: JetBrains Mono)
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+curl -fLo "JetBrains Mono Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+fc-cache -fv
+
 ```
 
 ### Notes
