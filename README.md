@@ -54,18 +54,126 @@ The configuration also includes setup for various Language Server Protocols (LSP
 
 ## System Dependencies
 
-This Neovim configuration requires several system dependencies to function correctly. Here's a list of the required dependencies:
+This Neovim configuration requires several system dependencies to function correctly. Below is a comprehensive list of the required dependencies, categorized by their usage:
+
+### General Requirements
 
 1. **Neovim**: You should be running Neovim v0.9.0 or later.
-2. **Git**: Many Neovim plugins are hosted on GitHub and are installed via Git. Make sure you have Git installed and it's at least version 2.19.0 for partial clones support.
-3. **Python**: Some plugins may require Python and associated package manager pip. Also, certain Python packages might be needed depending on the plugins you use. For example, `autopep8`, `black`, and `isort` for Python formatting and linting.
-4. **Node.js and npm**: If you're using any plugins that are written in JavaScript or TypeScript, or that provide features like JSON or TypeScript language servers, you'll need Node.js and npm (Node Package Manager).
-5. **Rust**: If you're using any plugins that are written in Rust or that provide features like Rust language server, you'll need Rust and its package manager Cargo.
-6. **Go**: If you're using any plugins that are written in Go or that provide features like Go language server, you'll need Go.
-7. **ShellCheck**: If you're using any plugins for shell script linting, you might need ShellCheck.
-8. **CMake and build-essential**: These are required for building some plugins from source.
-9. **FUSE libraries**: These are required for some plugins.
-10. **A Nerd Font**: Some plugins that add icons to Neovim (like `nvim-web-devicons`) require a Nerd Font to be installed.
+2. **Git**: Many Neovim plugins are hosted on GitHub and are installed via Git. Ensure you have Git installed, preferably version 2.19.0 or later for partial clone support.
+3. **Python**: Some plugins may require Python and the associated package manager pip. You may also need certain Python packages like `autopep8`, `black`, and `isort` for Python formatting and linting.
+4. **Node.js and npm**: Required for plugins written in JavaScript or TypeScript, or for those providing language servers for JavaScript or TypeScript.
+5. **Rust**: Required for plugins written in Rust or providing Rust language server support. Ensure you have Rust and its package manager Cargo installed.
+6. **Go**: Required for plugins written in Go or providing Go language server support. Ensure you have Go installed.
+7. **ShellCheck**: Required for shell script linting.
+8. **CMake and build-essential**: Required for building some plugins from source.
+9. **FUSE libraries**: Required for certain plugins.
+10. **A Nerd Font**: Required for plugins that add icons to Neovim, such as `nvim-web-devicons`.
+
+### Plugin-Specific Dependencies
+
+1. **Alpha Nvim (`alpha-nvim.lua`)**: No additional dependencies.
+2. **Auto Session (`auto-session.lua`)**: No additional dependencies.
+3. **Bufferline (`bufferline.lua`)**: No additional dependencies.
+4. **CoC (`coc.lua`)**:
+   - **Node.js**: `npm install -g neovim`
+   - Install language servers and extensions via `:CocInstall`.
+5. **Colorizer (`colorizer.lua`)**: No additional dependencies.
+6. **Colorscheme (`colorscheme.lua`)**: Specific colorschemes may require their own installation.
+7. **Comment (`comment.lua`)**: No additional dependencies.
+8. **Dressing (`dressing.lua`)**: No additional dependencies.
+9. **Formatting (`formatting.lua`)**:
+   - **Python**: `pip install black autopep8 isort`
+   - **Node.js**: `npm install -g prettier eslint`
+   - **Rust**: `cargo install rustfmt`
+   - **Go**: `go get -u golang.org/x/tools/cmd/goimports`
+10. **Friendly Snippets (`friendly-snippets.lua`)**: No additional dependencies.
+11. **GitSigns (`gitsigns.lua`)**:
+    - **Git**: Ensure Git is installed.
+12. **Harpoon (`harpoon.lua`)**: No additional dependencies.
+13. **LazyGit (`lazygit.lua`)**:
+    - **LazyGit**: `brew install lazygit` (macOS) or follow installation instructions for other OS.
+14. **Linting (`linting.lua`)**:
+    - **Python**: `pip install pylint`
+    - **Node.js**: `npm install -g eslint`
+15. **LSP (`lsp`)**:
+    - **Language Servers**: Install language servers using `:LspInstall` or manually.
+    - **Python**: `pip install pylsp`
+    - **Node.js**: `npm install -g typescript typescript-language-server`
+    - **Rust**: `rustup component add rls rust-analysis rust-src`
+    - **Go**: `go get -u golang.org/x/tools/gopls`
+16. **LuaSnip (`lua-snip.lua`)**: No additional dependencies.
+17. **Lualine (`lualine.lua`)**: No additional dependencies.
+18. **Neogen (`neogen.lua`)**: No additional dependencies.
+19. **Nvim Autopairs (`nvim-autopairs.lua`)**: No additional dependencies.
+20. **Nvim Cmp (`nvim-cmp.lua`)**: No additional dependencies.
+21. **Nvim Surround (`nvim-surround.lua`)**: No additional dependencies.
+22. **Nvim Tree (`nvim-tree.lua`)**:
+    - **Nerd Font**: Install a Nerd Font for file icons.
+23. **Nvim Treesitter (`nvim-treesitter.lua`, `nvim-treesitter-text-objects.lua`)**:
+    - **C Compiler**: Ensure you have a C compiler installed (e.g., `gcc` or `clang`).
+24. **Nvim Web Devicons (`nvim-web-devicons.lua`)**:
+    - **Nerd Font**: Install a Nerd Font for file icons.
+25. **Substitute (`substitute.lua`)**: No additional dependencies.
+26. **Telescope (`telescope.lua`)**:
+    - **Ripgrep**: `brew install ripgrep` (macOS) or follow installation instructions for other OS.
+    - **fd**: `brew install fd` (macOS) or follow installation instructions for other OS.
+27. **Todo Comments (`todo-comments.lua`)**: No additional dependencies.
+28. **Vim Maximizer (`vim-maximizer.lua`)**: No additional dependencies.
+29. **Which Key (`which-key.lua`)**: No additional dependencies.
+
+### Installation Commands
+
+Below are commands to install common dependencies on Ubuntu:
+
+```bash
+# Neovim
+sudo apt update
+sudo apt install neovim
+
+# Git
+sudo apt install git
+
+# Python and pip
+sudo apt install python3 python3-pip
+pip3 install autopep8 black isort pylint
+
+# Node.js and npm
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt install -y nodejs
+npm install -g neovim prettier eslint typescript typescript-language-server
+
+# Rust and Cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+cargo install rustfmt
+
+# Go
+sudo snap install go --classic
+go get -u golang.org/x/tools/cmd/goimports golang.org/x/tools/gopls
+
+# ShellCheck
+sudo apt install shellcheck
+
+# CMake and build-essential
+sudo apt install cmake build-essential
+
+# FUSE libraries
+sudo apt install libfuse2
+
+# Ripgrep
+sudo apt install ripgrep
+
+# fd
+sudo apt install fd-find
+
+# Nerd Font (example: FiraCode)
+sudo apt install fonts-firacode
+```
+
+### Notes
+
+- Ensure you follow the official installation instructions for dependencies based on your operating system.
+- The listed dependencies are comprehensive but may require adjustments based on specific plugins or updates to the configuration.
 
 ## Usage
 
