@@ -1,11 +1,16 @@
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
-	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+	event = { "BufReadPre", "BufNewFile" },
+
+	-- Configure the plugin
 	config = function()
+		-- Import the 'conform' module
 		local conform = require("conform")
 
+		-- Set up the 'conform' module
 		conform.setup({
+			-- Specify the formatters for each file type
 			formatters_by_ft = {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
@@ -23,18 +28,23 @@ return {
 				c = { "clang-format" },
 				bash = { "sbdchd/neoformat" },
 			},
+
+			-- Configure the behavior when saving a file
 			format_on_save = {
-				lsp_fallback = true,
-				async = false,
-				timeout_ms = 1500,
+				lsp_fallback = true, -- Use the LSP as a fallback formatter
+				async = false, -- Perform formatting synchronously
+				timeout_ms = 1500, -- Timeout for formatting (in milliseconds)
 			},
+
+			-- Configure specific formatters
 			formatter_configs = {
 				["clang-format"] = {
-					style = "{ BasedOnStyle: Google, IndentWidth: 4 }",
+					style = "{ BasedOnStyle: Google, IndentWidth: 4 }", -- Use the Google style guide with an indent width of 4
 				},
 			},
 		})
 
+		-- Set a keybinding for formatting the current file or selected range
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format({
 				lsp_fallback = true,
