@@ -27,9 +27,9 @@ return {
 		-- `/` cmdline setup
 		cmp.setup.cmdline({ "/", "?" }, {
 			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
+			sources = cmp.config.sources({
 				{ name = "buffer" },
-			},
+			}),
 		})
 
 		-- `:` cmdline setup
@@ -73,8 +73,8 @@ return {
 			-- Sources for autocompletion
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" }, -- LSP completion
-				{ name = "luasnip", keyword_length = 2 }, -- Snippets
-				{ name = "buffer", keyword_length = 3 }, -- Text within current buffer
+				{ name = "luasnip" }, -- Snippets
+				{ name = "buffer" }, -- Text within current buffer
 				{ name = "path" }, -- File system paths
 			}),
 			-- Configure lspkind for VS Code-like pictograms in completion menu

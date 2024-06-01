@@ -129,6 +129,19 @@ return {
 				-- configure Python server
 				lspconfig["pyright"].setup({
 					capabilities = capabilities,
+					settings = {
+						python = {
+							analysis = {
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								diagnosticMode = "workspace", -- Analyze all files in the workspace
+								autoImportCompletions = true,
+							},
+						},
+					},
+					on_attach = function(client, bufnr)
+						-- Custom on_attach function to set up additional keymaps or commands if needed
+					end,
 				})
 			end,
 			["tsserver"] = function()
