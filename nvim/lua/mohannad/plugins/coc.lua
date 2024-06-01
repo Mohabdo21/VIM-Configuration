@@ -1,7 +1,7 @@
 return {
 	"neoclide/coc.nvim",
 	lazy = true,
-	event = { "BufReadPre", "BufNewFile" },
+	-- event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		vim.g.coc_global_extensions = {
 			"coc-json",
@@ -9,7 +9,6 @@ return {
 			"coc-eslint",
 			"coc-prettier",
 			"coc-clangd",
-			"coc-ltex",
 			"coc-pyright",
 		}
 
