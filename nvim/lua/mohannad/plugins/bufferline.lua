@@ -11,7 +11,7 @@ return {
 	opts = {
 		options = {
 			separator_style = "thick",
-			mode = "buffers",
+			mode = "tabs",
 			offsets = {
 				{
 					filetype = "NvimTree",
