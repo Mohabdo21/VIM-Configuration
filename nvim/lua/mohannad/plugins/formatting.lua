@@ -26,7 +26,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				c = { "clang-format" },
-				bash = { "sbdchd/neoformat" },
+				bash = { "shfmt" },
 			},
 
 			-- Configure the behavior when saving a file
