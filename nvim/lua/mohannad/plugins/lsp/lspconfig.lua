@@ -91,6 +91,18 @@ return {
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
+					handlers = {
+						["workspace/diagnostic/refresh"] = function(err, result, ctx, config)
+							-- Log the refresh request
+							vim.lsp.log.info("workspace/diagnostic/refresh request received")
+							-- Trigger a diagnostic refresh
+							vim.lsp.diagnostic.on_publish_diagnostics(
+								nil,
+								result,
+								{ method = ctx.method, client_id = ctx.client_id, bufnr = ctx.bufnr, config = config }
+							)
+						end,
+					},
 				})
 			end,
 			["svelte"] = function()
