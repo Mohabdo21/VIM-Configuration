@@ -45,3 +45,32 @@ opt.swapfile = false
 -- enable code folding
 opt.foldmethod = "syntax" -- fold based on syntax
 opt.foldlevel = 0 -- start with all folds closed
+
+-- Mouse support
+opt.mouse = "a" -- Enable mouse support in all modes
+
+-- Scrolling
+opt.scrolljump = 5 -- Lines to scroll when the cursor goes off-screen
+opt.scrolloff = 5 -- Lines of context around the cursor
+
+-- Status line
+opt.laststatus = 2 -- Always show the status line
+
+-- Wild menu (command-line completion)
+opt.wildmenu = true -- Enable wild menu
+opt.wildmode = "list:longest" -- Command-line completion mode
+
+-- Hidden buffers
+opt.hidden = true -- Enable hidden buffers, allows you to switch buffers without saving
+
+-- Highlight on yank
+vim.cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}") -- Highlight when yanking
+
+-- Show matching brackets/parentheses
+opt.showmatch = true -- Show matching brackets/parentheses
+
+-- Encoding
+opt.encoding = "utf-8" -- Set default encoding to UTF-8
+
+-- Filetype plugins and indentation
+vim.cmd("filetype plugin indent on") -- Enable filetype plugins and indentation
