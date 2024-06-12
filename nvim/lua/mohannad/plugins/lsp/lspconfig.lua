@@ -78,8 +78,23 @@ return {
 			dynamicRegistration = true,
 		}
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
+		-- Configure diagnostics
+		vim.diagnostic.config({
+			virtual_text = false,
+			signs = {
+				active = {
+					{ name = "DiagnosticSignError", text = " " },
+					{ name = "DiagnosticSignWarn", text = " " },
+					{ name = "DiagnosticSignHint", text = "󰠠 " },
+					{ name = "DiagnosticSignInfo", text = " " },
+				},
+			},
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
+		})
+
+		-- Define diagnostic signs
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type

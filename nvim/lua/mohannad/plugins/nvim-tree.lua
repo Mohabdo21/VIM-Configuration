@@ -51,6 +51,14 @@ return {
 			git = {
 				ignore = false,
 			},
+			-- update the working directory to the directory of the opened file
+			update_cwd = true,
+			-- update the focused file
+			update_focused_file = {
+				enable = true,
+				update_cwd = true,
+				ignore_list = {},
+			},
 		})
 
 		-- set keymaps

@@ -29,7 +29,13 @@ return {
 			vim.cmd([[colorscheme github_dark_default]])
 		end,
 	},
-
+	-- {
+	-- 	"lunacookies/vim-colors-xcode",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme xcodedark") -- or "xcodelight"
+	-- 	end,
+	-- },
 	--{
 	--	"folke/tokyonight.nvim",
 	--	priority = 1000, -- make sure to load this before all the other start plugins

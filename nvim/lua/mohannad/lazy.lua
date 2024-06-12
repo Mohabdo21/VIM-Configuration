@@ -28,6 +28,7 @@ require("lazy").setup({ { import = "mohannad.plugins" }, { import = "mohannad.pl
 	install = {
 		-- Use the GitHub theme for the color scheme
 		colorscheme = { "projekt0n/github-nvim-theme" },
+		-- colorscheme = { "lunacookies/vim-colors-xcode" },
 	},
 	checker = {
 		-- Enable the checker
