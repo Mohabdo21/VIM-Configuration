@@ -259,13 +259,13 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["sqlls"] = function()
-				lspconfig["sqlls"].setup({
+			["tailwindcss"] = function()
+				lspconfig["tailwindcss"].setup({
 					capabilities = capabilities,
 				})
 			end,
-			["tailwindcss"] = function()
-				lspconfig["tailwindcss"].setup({
+			["sql-language-server"] = function()
+				lspconfig["sqlls"].setup({
 					capabilities = capabilities,
 				})
 			end,

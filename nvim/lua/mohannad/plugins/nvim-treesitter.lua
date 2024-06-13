@@ -45,6 +45,7 @@ return {
 					"python",
 					"c",
 					"puppet",
+					"sql",
 				},
 				incremental_selection = {
 					enable = true,

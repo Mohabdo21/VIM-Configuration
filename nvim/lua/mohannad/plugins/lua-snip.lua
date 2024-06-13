@@ -27,6 +27,7 @@ return {
 		require("luasnip").filetype_extend("kotlin", { "kdoc" })
 		require("luasnip").filetype_extend("ruby", { "rdoc" })
 		require("luasnip").filetype_extend("sh", { "shelldoc" })
+		require("luasnip").filetype_extend("sql", { "sqldoc" })
 
 		local luasnip = require("luasnip")
 		local cmp = require("cmp")

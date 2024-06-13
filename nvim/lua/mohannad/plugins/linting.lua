@@ -21,6 +21,7 @@ return {
 			bash = { "shellcheck" },
 			markdown = { "markdownlint" },
 			yaml = { "yamllint" },
+			sql = { "sqlfluff" },
 		}
 
 		-- Create an autogroup for linting

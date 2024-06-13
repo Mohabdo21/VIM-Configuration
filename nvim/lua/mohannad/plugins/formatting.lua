@@ -27,6 +27,7 @@ return {
 				python = { "isort", "black" },
 				c = { "clang-format" },
 				bash = { "shfmt" },
+				sql = { "sqlfmt" },
 			},
 
 			-- Configure the behavior when saving a file
