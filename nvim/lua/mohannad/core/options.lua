@@ -54,7 +54,7 @@ opt.scrolljump = 5 -- Lines to scroll when the cursor goes off-screen
 opt.scrolloff = 5 -- Lines of context around the cursor
 
 -- Status line
-opt.laststatus = 2 -- Always show the status line
+-- opt.laststatus = 2 -- Always show the status line
 
 -- Wild menu (command-line completion)
 opt.wildmenu = true -- Enable wild menu

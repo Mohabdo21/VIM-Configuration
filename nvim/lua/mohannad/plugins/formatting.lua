@@ -40,7 +40,7 @@ return {
 			-- Configure specific formatters
 			formatter_configs = {
 				["clang-format"] = {
-					style = "{ BasedOnStyle: Google, IndentWidth: 4 }", -- Use the Google style guide with an indent width of 4
+					style = "file", -- Use the .clang-format file in the project
 				},
 			},
 		})
