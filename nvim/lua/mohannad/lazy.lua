@@ -20,6 +20,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Set the Python 3 host program to Python 3.10
 vim.g.python3_host_prog = "python3.10"
 
+-- Set the Ruby host program
+vim.g.ruby_host_prog = "/usr/local/bin/neovim-ruby-host"
+
 -- Add the LuaRocks path to the package.cpath
 vim.api.nvim_command("lua package.cpath = package.cpath .. ';$HOME/.luarocks/lib/lua/5.1/?.so'")
 
