@@ -27,25 +27,27 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver",
-				"html",
-				"cssls",
-				"tailwindcss",
-				"svelte",
-				"lua_ls",
-				"graphql",
-				"emmet_ls",
-				"prismals",
-				"pyright",
-				"bashls",
-				"clangd",
-				"dockerls",
-				"docker_compose_language_service",
-				"jsonls",
-				"tsserver",
-				"markdown_oxide",
-				"puppet",
-				"hydra_lsp",
+				"tsserver", -- TypeScript
+				"html", -- HTML
+				"cssls", -- CSS
+				"tailwindcss", -- Tailwind CSS
+				"svelte", -- Svelte
+				"lua_ls", -- Lua
+				"graphql", -- GraphQL
+				"emmet_ls", -- Emmet
+				"prismals", -- Prisma
+				"pyright", -- Python
+				"pylsp", -- Python (alternative)
+				"bashls", -- Bash
+				"clangd", -- C/C++
+				"dockerls", -- Dockerfile
+				"docker_compose_language_service", -- Docker Compose
+				"jsonls", -- JSON
+				"markdown_oxide", -- Markdown
+				"puppet", -- Puppet
+				"hydra_lsp", -- Hydra
+				"gopls", -- Go
+				"eslint", -- JavaScript/TypeScript Linting
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
@@ -53,13 +55,16 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"prettier", -- prettier formatter
-				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
-				"pylint", -- python linter
-				"eslint_d", -- js linter
-				"eslint",
+				"prettier", -- Code formatter
+				"stylua", -- Lua formatter
+				"isort", -- Python formatter
+				"black", -- Python formatter
+				"pylint", -- Python linter
+				"eslint_d", -- JavaScript/TypeScript linter
+				"eslint", -- JavaScript/TypeScript linter (alternative)
+				"flake8", -- Python linter
+				"shfmt", -- Shell formatter
+				"clang-format", -- C/C++ formatter
 			},
 		})
 	end,

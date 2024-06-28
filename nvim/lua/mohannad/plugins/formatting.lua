@@ -12,10 +12,10 @@ return {
 		conform.setup({
 			-- Specify the formatters for each file type
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
+				javascript = { "prettier", "eslint_d" }, -- Added eslint_d for JavaScript
+				typescript = { "prettier", "eslint_d" }, -- Added eslint_d for TypeScript
+				javascriptreact = { "prettier", "eslint_d" }, -- Added eslint_d for JSX
+				typescriptreact = { "prettier", "eslint_d" }, -- Added eslint_d for TSX
 				svelte = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
@@ -24,10 +24,14 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = { "isort", "black", "pylint" }, -- Added pylint for Python
 				c = { "clang-format" },
+				cpp = { "clang-format" }, -- Added C++ support
 				bash = { "shfmt" },
 				sql = { "sqlfmt" },
+				go = { "gofmt" }, -- Added Go support
+				rust = { "rustfmt" }, -- Added Rust support
+				-- Add more formatters as needed
 			},
 
 			-- Configure the behavior when saving a file
@@ -42,6 +46,15 @@ return {
 				["clang-format"] = {
 					style = "file", -- Use the .clang-format file in the project
 				},
+				["prettier"] = {
+					-- Example: customize prettier options here
+					args = { "--print-width", "80" },
+				},
+				["black"] = {
+					-- Example: customize black options here
+					args = { "--line-length", "80" },
+				},
+				-- Add custom configurations for other formatters as needed
 			},
 		})
 
