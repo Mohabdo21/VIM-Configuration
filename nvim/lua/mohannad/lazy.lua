@@ -18,10 +18,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Set the Python 3 host program to Python 3.10
-vim.g.python3_host_prog = "python3.10"
+vim.g.python3_host_prog = "/usr/bin/python3"
 
 -- Set the Ruby host program
-vim.g.ruby_host_prog = "/usr/local/bin/neovim-ruby-host"
+vim.g.ruby_host_prog = "neovim-ruby-host"
 
 -- Add the LuaRocks path to the package.cpath
 vim.api.nvim_command("lua package.cpath = package.cpath .. ';$HOME/.luarocks/lib/lua/5.1/?.so'")
@@ -32,6 +32,8 @@ require("lazy").setup({ { import = "mohannad.plugins" }, { import = "mohannad.pl
 		-- Use the GitHub theme for the color scheme
 		colorscheme = { "projekt0n/github-nvim-theme" },
 		-- colorscheme = { "lunacookies/vim-colors-xcode" },
+		-- Kanagwa colorscheme
+		-- colorscheme = { "rebelot/kanagawa.nvim" },
 	},
 	checker = {
 		-- Enable the checker

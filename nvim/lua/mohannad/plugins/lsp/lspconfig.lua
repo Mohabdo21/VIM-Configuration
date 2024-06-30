@@ -101,6 +101,25 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		-- -- Function to get python path
+		-- local function get_python_path(workspace)
+		-- 	-- Use activated virtualenv
+		-- 	if vim.env.VIRTUAL_ENV then
+		-- 		return vim.env.VIRTUAL_ENV .. "/bin/python"
+		-- 	end
+		--
+		-- 	-- Find and use virtualenv in workspace directory
+		-- 	for _, pattern in ipairs({ "*", ".*" }) do
+		-- 		local match = vim.fn.glob(vim.fn.expand(workspace .. "/" .. pattern .. "/bin/python"))
+		-- 		if match ~= "" then
+		-- 			return match
+		-- 		end
+		-- 	end
+		--
+		-- 	-- Fallback to system Python
+		-- 	return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+		-- end
+		--
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
@@ -165,16 +184,30 @@ return {
 					settings = {
 						python = {
 							analysis = {
+								diagnosticMode = "workspace", -- Analyze all files in the workspace
 								autoSearchPaths = true,
 								useLibraryCodeForTypes = true,
-								diagnosticMode = "workspace", -- Analyze all files in the workspace
 								autoImportCompletions = true,
 							},
 						},
 					},
+					-- before_init = function(_, config)
+					-- 	config.settings.python.pythonPath = get_python_path(config.root_dir)
+					-- end,
 					on_attach = function(client, bufnr)
 						-- Custom on_attach function to set up additional keymaps or commands if needed
 					end,
+				})
+			end,
+			["pylsp"] = function()
+				-- configure Python server
+				lspconfig["pylsp"].setup({
+					capabilities = capabilities,
+				})
+			end,
+			["jedi_language_server"] = function()
+				lspconfig["jedi_language_server"].setup({
+					capabilities = capabilities,
 				})
 			end,
 			["tsserver"] = function()

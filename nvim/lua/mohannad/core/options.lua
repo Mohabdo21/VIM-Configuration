@@ -15,7 +15,7 @@ opt.wrap = true -- disable line wrapping
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+opt.smartcase = false -- if you include mixed case in your search, assumes you want case-sensitive
 
 -- cursor line
 opt.cursorline = false -- highlight the current cursor line
@@ -74,3 +74,6 @@ opt.encoding = "utf-8" -- Set default encoding to UTF-8
 
 -- Filetype plugins and indentation
 vim.cmd("filetype plugin indent on") -- Enable filetype plugins and indentation
+
+-- Virtual Block mode highlight
+opt.virtualedit = "block"

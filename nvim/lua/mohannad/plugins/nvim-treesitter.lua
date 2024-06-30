@@ -47,7 +47,11 @@ return {
 					"c",
 					"puppet",
 					"sql",
+					"vimdoc",
 				},
+
+				auto_install = true,
+
 				incremental_selection = {
 					enable = true,
 					keymaps = {

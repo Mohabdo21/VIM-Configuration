@@ -24,7 +24,7 @@ return {
 				markdown = { "prettier" },
 				graphql = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black", "pylint" }, -- Added pylint for Python
+				python = { "isort", "black" }, -- Added pylint for Python
 				c = { "clang-format" },
 				cpp = { "clang-format" }, -- Added C++ support
 				bash = { "shfmt" },
