@@ -34,6 +34,7 @@ require("lazy").setup({ { import = "mohannad.plugins" }, { import = "mohannad.pl
 		-- colorscheme = { "lunacookies/vim-colors-xcode" },
 		-- Kanagwa colorscheme
 		-- colorscheme = { "rebelot/kanagawa.nvim" },
+		-- colorscheme = { "folke/tokyonight.nvim" },
 	},
 	checker = {
 		-- Enable the checker

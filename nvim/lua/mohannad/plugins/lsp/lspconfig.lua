@@ -297,11 +297,6 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["sql-language-server"] = function()
-				lspconfig["sqlls"].setup({
-					capabilities = capabilities,
-				})
-			end,
 			["typos_lsp"] = function()
 				lspconfig["typos_lsp"].setup({
 					capabilities = capabilities,
