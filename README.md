@@ -121,74 +121,155 @@ This Neovim configuration requires several system dependencies to function corre
 28. **Vim Maximizer (`vim-maximizer.lua`)**: No additional dependencies.
 29. **Which Key (`which-key.lua`)**: No additional dependencies.
 
-### Installation Commands
+## Installation
 
-Below are commands to install common dependencies on Ubuntu:
+### On Ubuntu
 
-```bash
-# Neovim
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt update
-sudo apt install neovim
+1. **Install Neovim**
 
-# Git
-sudo apt install git
+   ```bash
+   sudo apt update
+   sudo apt install neovim
+   ```
+   If you faced any issues refer to official nvim [repo](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)
 
-# Python and pip
-sudo apt install python3 python3-pip
-pip3 install --user autopep8 black isort pynvim
+2. **Install Git**
 
-# Node.js and npm
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt install -y nodejs
-npm install -g neovim
+   ```bash
+   sudo apt install git
+   ```
 
-# Rust and Cargo
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
+3. **Install Python and pip**
 
-# Go
-sudo apt install golang
+   ```bash
+   sudo apt install python3 python3-pip
+   ```
 
-# ShellCheck
-sudo apt install shellcheck
+4. **Install Node.js and npm**
 
-# CMake and build-essential
-sudo apt install cmake build-essential
+   ```bash
+   sudo apt install nodejs npm
+   ```
 
-# FUSE libraries
-sudo apt install libfuse2
+5. **Install Rust**
 
-# Ripgrep
-sudo apt install ripgrep
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
 
-# fzf
-sudo apt install fzf
+6. **Install Go**
 
-# bat
-sudo apt install bat
+   ```bash
+   sudo apt install golang
+   ```
 
-# fd
-sudo apt install fd-find
+7. **Install ShellCheck**
 
-# Universal Ctags
-sudo apt install universal-ctags
+   ```bash
+   sudo apt install shellcheck
+   ```
 
-# Nerd Font (example: JetBrains Mono)
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts
-curl -fLo "JetBrains Mono Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-fc-cache -fv
+8. **Install CMake and build-essential**
 
-```
+   ```bash
+   sudo apt install cmake build-essential
+   ```
+
+9. **Install FUSE libraries**
+
+   ```bash
+   sudo apt install fuse
+   ```
+
+10. **Install a Nerd Font**
+
+    Download and install a Nerd Font from [Nerd Fonts GitHub](https://github.com/ryanoasis/nerd-fonts/releases).
+
+### On macOS
+
+1. **Install Neovim**
+
+   ```bash
+   brew install neovim
+   ```
+   If you faced any issues refer to official nvim [repo](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)
+
+2. **Install Git**
+
+   ```bash
+   brew install git
+   ```
+
+3. **Install Python and pip**
+
+   ```bash
+   brew install python
+   ```
+
+4. **Install Node.js and npm**
+
+   ```bash
+   brew install node
+   ```
+
+5. **Install Rust**
+
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+
+6. **Install Go**
+
+   ```bash
+   brew install go
+   ```
+
+7. **Install ShellCheck**
+
+   ```bash
+   brew install shellcheck
+   ```
+
+8. **Install CMake and build-essential**
+
+   ```bash
+   brew install cmake
+   ```
+
+9. **Install a Nerd Font**
+
+   Download and install a Nerd Font from [Nerd Fonts GitHub](https://github.com/ryanoasis/nerd-fonts/releases).
+
+## Usage
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/Mohabdo21/VIM-Configuration.git
+   cd VIM-Configuration
+   ```
+
+2. **Backup Your Current Neovim Configuration**
+
+   ```bash
+   mv ~/.config/nvim ~/.config/nvim.bak
+   ```
+
+3. **Copy the New Configuration**
+
+   ```bash
+   cp -r ./nvim ~/.config/
+   ```
+
+4. **Run Neovim**
+
+   ```bash
+   nvim
+   ```
 
 ### Notes
 
 - Ensure you follow the official installation instructions for dependencies based on your operating system.
 - The listed dependencies are comprehensive but may require adjustments based on specific plugins or updates to the configuration.
 
-## Usage
-
-To use this configuration, clone this repository to your Neovim configuration directory and install the required plugins.
-
-Please note that this configuration is personalized to my own usage. Feel free to modify it to suit your needs.
+This configuration is personalized to my own usage. Feel free to modify it to suit your needs.
