@@ -101,7 +101,7 @@ return {
 				undo = {
 					use_delta = true,
 					side_by_side = false,
-					diff_context_lines = vim.o.scrolloff,
+					vim_diff_opts = { ctxlen = 5 },
 					entry_format = "state #$ID, $STAT, $TIME",
 					mappings = {
 						i = {
