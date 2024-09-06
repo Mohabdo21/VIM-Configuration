@@ -6,7 +6,7 @@ return {
 
 		require("auto-session").setup({
 			auto_restore_last_session = false, -- Updated config name
-			suppressed_dirs = { "~/", "~/Desktop", "~/Downloads" }, -- Updated config name
+			suppressed_dirs = { "~/", "~/Desktop", "~/Downloads", "~/Train_my_self" }, -- Updated config name
 			session_lens = {
 				buftypes_to_ignore = {},
 				load_on_setup = false, -- Ensures session-lens does not load automatically
