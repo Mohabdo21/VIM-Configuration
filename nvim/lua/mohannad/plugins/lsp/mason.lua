@@ -27,7 +27,6 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver", -- TypeScript
 				"html", -- HTML
 				"cssls", -- CSS
 				"tailwindcss", -- Tailwind CSS

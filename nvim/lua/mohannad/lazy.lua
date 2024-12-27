@@ -18,7 +18,36 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Set the Python 3 host program to Python 3.10
-vim.g.python3_host_prog = "/usr/bin/python3"
+-- vim.g.python3_host_prog = "/usr/bin/python3"
+
+-- Lua function to detect Python virtual environment and set python3_host_prog
+local function get_python_venv()
+	-- Check if VIRTUAL_ENV is set, indicating an active venv
+	local venv_path = os.getenv("VIRTUAL_ENV")
+	if venv_path then
+		return venv_path .. "/bin/python"
+	end
+
+	-- If no VIRTUAL_ENV, check for .venv in the current directory
+	local project_venv = vim.fn.getcwd() .. "/.venv/bin/python"
+	if vim.fn.filereadable(project_venv) == 1 then
+		return project_venv
+	end
+
+	-- Default to system Python
+	return "/usr/bin/python3"
+end
+
+-- Set python3_host_prog initially
+vim.g.python3_host_prog = get_python_venv()
+
+-- Automatically update python3_host_prog when changing directories
+vim.api.nvim_create_autocmd("DirChanged", {
+	pattern = "*",
+	callback = function()
+		vim.g.python3_host_prog = get_python_venv()
+	end,
+})
 
 -- Set the Ruby host program
 vim.g.ruby_host_prog = "neovim-ruby-host"

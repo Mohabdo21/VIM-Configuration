@@ -184,7 +184,7 @@ return {
 					settings = {
 						python = {
 							analysis = {
-								diagnosticMode = "workspace", -- Analyze all files in the workspace
+								diagnosticMode = "openFilesOnly", -- Analyze all files in the workspace
 								autoSearchPaths = true,
 								useLibraryCodeForTypes = true,
 								autoImportCompletions = true,
