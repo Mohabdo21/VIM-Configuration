@@ -30,13 +30,8 @@ return {
 				"html", -- HTML
 				"cssls", -- CSS
 				"tailwindcss", -- Tailwind CSS
-				"svelte", -- Svelte
 				"lua_ls", -- Lua
-				"graphql", -- GraphQL
-				"emmet_ls", -- Emmet
-				"prismals", -- Prisma
 				"pyright", -- Python
-				"pylsp", -- Python (alternative)
 				"bashls", -- Bash
 				"clangd", -- C/C++
 				"dockerls", -- Dockerfile
@@ -44,12 +39,12 @@ return {
 				"jsonls", -- JSON
 				"markdown_oxide", -- Markdown
 				"puppet", -- Puppet
-				"hydra_lsp", -- Hydra
 				"gopls", -- Go
-				"eslint", -- JavaScript/TypeScript Linting
+				"ts_ls", -- TypeScript
+				"typos_lsp", -- Spell checking
 			},
 			-- auto-install configured servers (with lspconfig)
-			automatic_installation = true, -- not the same as ensure_installed
+			automatic_installation = false, -- not the same as ensure_installed
 		})
 
 		mason_tool_installer.setup({
@@ -60,10 +55,11 @@ return {
 				"black", -- Python formatter
 				"pylint", -- Python linter
 				"eslint_d", -- JavaScript/TypeScript linter
-				"eslint", -- JavaScript/TypeScript linter (alternative)
-				"flake8", -- Python linter
 				"shfmt", -- Shell formatter
 				"clang-format", -- C/C++ formatter
+				"shellcheck", -- Shell linter
+				"markdownlint", -- Markdown linter
+				"yamllint", -- YAML linter
 			},
 		})
 	end,

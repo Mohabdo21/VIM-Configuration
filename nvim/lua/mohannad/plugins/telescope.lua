@@ -1,6 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
+	event = "VeryLazy",
 	dependencies = {
 		"nvim-lua/plenary.nvim", -- Common utilities
 		"ThePrimeagen/harpoon", -- Harpoon for file navigation
@@ -10,7 +11,6 @@ return {
 		"nvim-telescope/telescope-fzf-native.nvim", -- FZF sorter
 		"nvim-telescope/telescope-ui-select.nvim", -- UI select extension
 		"aaronhallaert/advanced-git-search.nvim", -- Advanced git search
-		"nvim-telescope/telescope-media-files.nvim", -- Media files preview
 		"MunifTanjim/nui.nvim", -- UI component library
 		"rcarriga/nvim-notify", -- Notifications
 		"folke/noice.nvim", -- Noice plugin
