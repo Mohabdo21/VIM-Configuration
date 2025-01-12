@@ -1,5 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
+	event = "BufReadPre",
 	lazy = true,
 	config = function()
 		require("nvim-treesitter.configs").setup({

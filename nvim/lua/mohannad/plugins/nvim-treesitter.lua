@@ -11,6 +11,9 @@ return {
 			local treesitter = require("nvim-treesitter.configs")
 
 			treesitter.setup({
+				modules = {},
+				sync_install = false, -- Disable sync-install to speed up startup
+				ignore_install = {},
 				highlight = { enable = true }, -- Enable syntax highlighting
 				indent = { enable = false }, -- Disable Treesitter-based indentation (optional)
 				autotag = { enable = true }, -- Enable autotagging
