@@ -88,6 +88,7 @@ return {
 				require("notify").setup({
 					-- Set custom timeout for notifications (in milliseconds)
 					timeout = 800, -- Adjust this value as needed
+					merge_duplicates = false, -- Merge duplicate notifications
 				})
 			end,
 		},

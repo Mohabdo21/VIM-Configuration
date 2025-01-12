@@ -34,5 +34,27 @@ return {
 
 		-- Disable folding on alpha buffer
 		vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+
+		-- Safeguard for invalid buffer interactions
+		vim.api.nvim_create_autocmd("BufUnload", {
+			callback = function(args)
+				local buf_name = vim.fn.bufname(args.buf)
+				if buf_name == "alpha" then
+					-- Avoid errors on alpha buffer unload
+					require("alpha").close()
+				end
+			end,
+		})
+
+		-- Handle window resizing safely
+		vim.api.nvim_create_autocmd("WinResized", {
+			callback = function()
+				-- Ensure alpha buffer is valid and redraw it
+				local buf = vim.api.nvim_get_current_buf()
+				if vim.fn.bufname(buf) == "alpha" and vim.api.nvim_buf_is_valid(buf) then
+					require("alpha").redraw()
+				end
+			end,
+		})
 	end,
 }

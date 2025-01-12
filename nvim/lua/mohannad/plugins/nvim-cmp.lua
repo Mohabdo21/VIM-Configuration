@@ -79,10 +79,16 @@ return {
 			}),
 			-- Configure lspkind for VS Code-like pictograms in completion menu
 			formatting = {
+				fields = { "kind", "abbr", "menu" }, -- Fields to display in the completion menu
 				format = lspkind.cmp_format({
-					maxwidth = 50,
-					ellipsis_char = "...",
+					mode = "symbol", -- Show only symbol (icon) annotations
+					maxwidth = 50, -- Maximum width of the completion menu
+					ellipsis_char = "...", -- Ellipsis character when text overflows
+					before = function(entry, vim_item)
+						return vim_item
+					end,
 				}),
+				expandable_indicator = true, -- Show an indicator for expandable items (e.g., snippets)
 			},
 		})
 	end,
