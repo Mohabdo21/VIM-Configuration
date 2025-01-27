@@ -112,11 +112,11 @@ return {
 			settings = {
 				python = {
 					analysis = {
-						diagnosticMode = "openFilesOnly",
-						autoSearchPaths = true,
-						useLibraryCodeForTypes = true,
-						autoImportCompletions = true,
-						typeCheckingMode = "basic",
+						diagnosticMode = "openFilesOnly", -- Only analyze open files
+						autoSearchPaths = true, -- Automatically add common Python paths
+						useLibraryCodeForTypes = true, -- Use library code for type inference
+						autoImportCompletions = true, -- Enable auto-import completions
+						typeCheckingMode = "basic", -- Set type checking mode to "basic"
 					},
 				},
 			},

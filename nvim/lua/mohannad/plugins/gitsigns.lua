@@ -76,16 +76,16 @@ return {
 			},
 
 			-- Diff preview
-			preview_config = {
-				border = "rounded",
-				style = "minimal",
-				relative = "cursor",
-				row = 0,
-				col = 1,
-			},
+			-- preview_config = {
+			-- 	border = "rounded",
+			-- 	style = "minimal",
+			-- 	relative = "cursor",
+			-- 	row = 0,
+			-- 	col = 1,
+			-- },
 
 			-- Word diff
-			word_diff = true,
+			-- word_diff = true,
 
 			-- Status line integration
 			-- signcolumn = true,

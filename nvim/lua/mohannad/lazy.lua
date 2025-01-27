@@ -22,24 +22,49 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Lua function to detect Python virtual environment and set python3_host_prog
 local function get_python_venv()
-	-- Check if VIRTUAL_ENV is set, indicating an active venv
-	local venv_path = os.getenv("VIRTUAL_ENV")
-	if venv_path then
-		return venv_path .. "/bin/python"
+	-- List of Python interpreters to check (in order of priority)
+	local python_interpreters = {
+		-- Active virtual environment
+		os.getenv("VIRTUAL_ENV") and os.getenv("VIRTUAL_ENV") .. "/bin/python",
+		-- Project virtual environment
+		vim.fn.getcwd() .. "/.venv/bin/python",
+		-- Global virtual environment
+		vim.fn.expand("~/.local/pynvim-venv/bin/python"),
+		-- System Python
+		"/usr/bin/python3",
+	}
+
+	-- Function to check if a Python interpreter is valid and has pynvim installed
+	local function is_valid_python(python_path)
+		if vim.fn.executable(python_path) == 0 then
+			return false
+		end
+
+		-- Check if pynvim is installed
+		local handle = io.popen(python_path .. " -c 'import pynvim; print(pynvim.__file__)' 2>&1")
+		local result = handle:read("*a")
+		handle:close()
+
+		-- If the command succeeds, pynvim is installed
+		return result and not result:match("ModuleNotFoundError")
 	end
 
-	-- If no VIRTUAL_ENV, check for .venv in the current directory
-	local project_venv = vim.fn.getcwd() .. "/.venv/bin/python"
-	if vim.fn.filereadable(project_venv) == 1 then
-		return project_venv
+	-- Iterate through the list of interpreters and return the first valid one
+	for _, python_path in ipairs(python_interpreters) do
+		if python_path and is_valid_python(python_path) then
+			return python_path
+		end
 	end
 
-	-- Default to system Python
-	return "/usr/bin/python3"
+	-- If no valid interpreter is found, return nil
+	return nil
 end
 
 -- Set python3_host_prog initially
-vim.g.python3_host_prog = get_python_venv()
+local python_path = get_python_venv()
+if python_path then
+	vim.g.python3_host_prog = python_path
+end
 
 -- Automatically update python3_host_prog when changing directories
 vim.api.nvim_create_autocmd("DirChanged", {
@@ -51,6 +76,9 @@ vim.api.nvim_create_autocmd("DirChanged", {
 
 -- Set the Ruby host program
 vim.g.ruby_host_prog = "neovim-ruby-host"
+
+-- Set the perl host program
+vim.g.perl_host_prog = "neovim-perl-host"
 
 -- Add the LuaRocks path to the package.cpath
 vim.api.nvim_command("lua package.cpath = package.cpath .. ';$HOME/.luarocks/lib/lua/5.1/?.so'")
