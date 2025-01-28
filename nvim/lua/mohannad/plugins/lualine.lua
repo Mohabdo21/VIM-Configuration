@@ -91,17 +91,19 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff" },
-				lualine_c = { "filename" },
+				lualine_c = {
+					"filename",
+					{
+						"diagnostics",
+						sources = { "nvim_lsp" },
+						symbols = { error = " ", warn = " ", hint = "󰌶 ", info = " " },
+					},
+				},
 				lualine_x = {
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
 						color = { fg = "#ff9e64" },
-					},
-					{
-						"diagnostics",
-						sources = { "nvim_lsp" },
-						symbols = { error = "E", warn = "W", info = "I", hint = "H" },
 					},
 					{ "encoding" },
 					{ "fileformat" },
