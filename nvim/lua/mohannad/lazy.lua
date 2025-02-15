@@ -80,6 +80,9 @@ vim.g.ruby_host_prog = "neovim-ruby-host"
 -- Set the perl host program
 vim.g.perl_host_prog = "neovim-perl-host"
 
+-- Disable Perl remote-plugins
+vim.g.loaded_perl_provider = 0
+
 -- Add the LuaRocks path to the package.cpath
 vim.api.nvim_command("lua package.cpath = package.cpath .. ';$HOME/.luarocks/lib/lua/5.1/?.so'")
 

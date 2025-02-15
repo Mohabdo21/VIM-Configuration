@@ -10,7 +10,7 @@ return {
 			require("session_manager").load_session()
 		end, { noremap = true, desc = "Load Session" })
 
-		vim.keymap.set("n", "<leader>sv", function()
+		vim.keymap.set("n", "<leader>sn", function()
 			require("session_manager").save_current_session()
 		end, { noremap = true, desc = "Save Session" })
 	end,
