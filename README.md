@@ -131,6 +131,7 @@ This Neovim configuration requires several system dependencies to function corre
    sudo apt update
    sudo apt install neovim
    ```
+
    If you faced any issues refer to official nvim [repo](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)
 
 2. **Install Git**
@@ -192,6 +193,7 @@ This Neovim configuration requires several system dependencies to function corre
    ```bash
    brew install neovim
    ```
+
    If you faced any issues refer to official nvim [repo](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)
 
 2. **Install Git**
@@ -266,6 +268,20 @@ This Neovim configuration requires several system dependencies to function corre
    ```bash
    nvim
    ```
+
+### Update you Neovim (AppImage)
+
+Update Script
+
+A script named `update_nvim.sh` has been added to simplify updating Neovim binary if not installed via package manager.
+
+- **Usage:**
+
+To run the update script make sure it's executable `chmod +x`, then execute the following command from the repository's root directory:
+
+`./update_nvim.sh`
+
+This script will check for the neovim updates and update you current installation.
 
 ### Notes
 
