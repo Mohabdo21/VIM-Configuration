@@ -27,15 +27,10 @@ return {
 		)
 		keymap.set(
 			"n",
-			"<leader>hr",
+			"<leader>he",
 			"<cmd>lua require('harpoon.mark').rm_file()<cr>",
 			{ desc = "Remove current file from harpoon marks" }
 		)
-		keymap.set(
-			"n",
-			"<leader>hq",
-			"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
-			{ desc = "Display Harpoon marked files" }
-		)
+		keymap.set("n", "<leader>hq", ":Telescope harpoon marks<cr>", { desc = "Open harpoon marks in telescope" })
 	end,
 }
