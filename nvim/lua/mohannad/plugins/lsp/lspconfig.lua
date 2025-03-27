@@ -84,6 +84,7 @@ return {
 			"puppet", -- Puppet
 			"typos_lsp", -- Spell checking
 			"ts_ls", -- TypeScript
+			"csharp_ls", -- C#
 		}
 
 		for _, server in ipairs(servers) do

@@ -22,6 +22,11 @@ return {
 		dashboard.section.buttons.val = {
 			dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
 			dashboard.button("SPC ee", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
+			dashboard.button(
+				"SPC hq",
+				"  > Jump to bookmarks",
+				"<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>"
+			),
 			dashboard.button("SPC fr", "󰱼  > Recent Files", "<cmd>Telescope oldfiles<CR>"),
 			dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
 			dashboard.button("SPC fs", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
