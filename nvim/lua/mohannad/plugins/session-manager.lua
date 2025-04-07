@@ -24,7 +24,7 @@ return {
 
 		-- Keybindings for manual session management
 		vim.keymap.set("n", "<leader>ls", function()
-			session_manager.load_session()
+			session_manager.load_session(false)
 		end, { noremap = true, desc = "Load Session" })
 
 		vim.keymap.set("n", "<leader>sn", function()

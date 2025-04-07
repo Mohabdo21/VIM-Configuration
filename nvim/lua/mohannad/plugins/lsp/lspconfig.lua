@@ -118,6 +118,7 @@ return {
 						useLibraryCodeForTypes = true, -- Use library code for type inference
 						autoImportCompletions = true, -- Enable auto-import completions
 						typeCheckingMode = "basic", -- Set type checking mode to "basic"
+						completeFunctionParens = true, -- Complete function parentheses
 					},
 				},
 			},
@@ -136,6 +137,13 @@ return {
 						includeInlayFunctionLikeReturnTypeHints = true,
 						includeInlayEnumMemberValueHints = true,
 					},
+					suggest = {
+						autoImports = true,
+						completeFunctionCalls = true,
+					},
+					updateImportsOnFileMove = {
+						enabled = "always",
+					},
 				},
 				javascript = {
 					inlayHints = {
@@ -145,6 +153,13 @@ return {
 						includeInlayPropertyDeclarationTypeHints = true,
 						includeInlayFunctionLikeReturnTypeHints = true,
 						includeInlayEnumMemberValueHints = true,
+					},
+					suggest = {
+						autoImports = true,
+						completeFunctionCalls = true,
+					},
+					updateImportsOnFileMove = {
+						enabled = "always",
 					},
 				},
 			},
@@ -216,10 +231,18 @@ return {
 			on_attach = on_attach,
 			settings = {
 				gopls = {
+					completeFunctionCalls = true, -- Complete function calls
+					completeUnimported = true, -- Complete unimported packages
+					directoryFilters = { "-.git", "-node_modules" }, -- Exclude .git and node_modules directories
+					memoryMode = "DegradeClosed", -- Use degraded memory mode for closed files
 					analyses = {
-						unusedparams = true,
+						unusedparams = true, -- Highlight unused parameters
+						unreachable = true, -- Highlight unreachable code
+						nilness = true, -- Detect nil pointer dereferences
+						unusedwrite = true, -- Highlight unused writes
+						unusedvariable = true, -- Highlight unused variables
+						shadow = true, -- Highlight shadowed variables
 					},
-					staticcheck = true,
 				},
 			},
 		})

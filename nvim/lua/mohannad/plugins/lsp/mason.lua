@@ -61,6 +61,7 @@ return {
 				"shellcheck", -- Shell linter
 				"markdownlint", -- Markdown linter
 				"yamllint", -- YAML linter
+				"golangci-lint", -- Go linter
 			},
 		})
 	end,
