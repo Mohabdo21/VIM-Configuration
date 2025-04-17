@@ -233,6 +233,7 @@ return {
 				gopls = {
 					completeFunctionCalls = true, -- Complete function calls
 					completeUnimported = true, -- Complete unimported packages
+					sortImports = true, -- Sort imports
 					directoryFilters = { "-.git", "-node_modules" }, -- Exclude .git and node_modules directories
 					memoryMode = "DegradeClosed", -- Use degraded memory mode for closed files
 					analyses = {

@@ -29,7 +29,7 @@ return {
 				cpp = { "clang-format" }, -- Added C++ support
 				bash = { "shfmt" },
 				sql = { "sqlfmt" },
-				go = { "gofmt" }, -- Added Go support
+				go = { "gofmt", "gopls" }, -- Added Go support
 				rust = { "rustfmt" }, -- Added Rust support
 				-- Add more formatters as needed
 			},
