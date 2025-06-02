@@ -29,7 +29,7 @@ return {
 				cpp = { "clang-format" }, -- Added C++ support
 				bash = { "shfmt" },
 				sql = { "sqlfmt" },
-				go = { "gofmt", "gopls" }, -- Added Go support
+				go = { "gofmt" }, -- Added Go support
 				rust = { "rustfmt" }, -- Added Rust support
 				-- Add more formatters as needed
 			},
@@ -44,17 +44,16 @@ return {
 			-- Configure specific formatters
 			formatter_configs = {
 				["clang-format"] = {
-					style = "file", -- Use the .clang-format file in the project
+					style = "file",
 				},
 				["prettier"] = {
-					-- Example: customize prettier options here
-					args = { "--print-width", "80" },
+					command = "prettier",
+					args = { "--stdin-filepath", "$FILENAME", "--print-width", "80" },
 				},
 				["black"] = {
-					-- Example: customize black options here
-					args = { "--line-length", "80" },
+					command = "black",
+					args = { "--quiet", "-", "--line-length", "80" },
 				},
-				-- Add custom configurations for other formatters as needed
 			},
 		})
 

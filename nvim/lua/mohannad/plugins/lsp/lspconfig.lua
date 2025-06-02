@@ -73,17 +73,11 @@ return {
 		local servers = {
 			"html", -- HTML
 			"cssls", -- CSS
-			"tailwindcss", -- Tailwind CSS
 			"bashls", -- Bash
-			"clangd", -- C/C++
-			"dockerls", -- Docker
 			"docker_compose_language_service", -- Docker Compose
-			"jsonls", -- JSON
 			"markdown_oxide", -- Markdown
-			"gopls", -- Go
 			"puppet", -- Puppet
 			"typos_lsp", -- Spell checking
-			"ts_ls", -- TypeScript
 			"csharp_ls", -- C#
 		}
 
