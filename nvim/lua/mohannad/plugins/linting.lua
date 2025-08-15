@@ -31,8 +31,13 @@ return {
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,
 			callback = function()
+				local curpos = vim.api.nvim_win_get_cursor(0)
 				-- Try to lint the buffer
 				lint.try_lint()
+				if vim.bo.modifiable then
+					vim.cmd([[keeppatterns %s/\s\+$//e]])
+				end
+				vim.api.nvim_win_set_cursor(0, curpos)
 			end,
 		})
 
