@@ -1,6 +1,26 @@
 return {
 	"stevearc/dressing.nvim",
-	event = "VeryLazy",
+	lazy = true, -- do not load on VeryLazy anymore
+	init = function()
+		-- Lazy-load only when one of the UI functions is actually used
+		local function lazy_load()
+			if not package.loaded["dressing"] then
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+			end
+		end
+		local orig_select = vim.ui.select
+		local orig_input = vim.ui.input
+		vim.ui.select = function(items, opts, on_choice)
+			lazy_load()
+			vim.ui.select = orig_select -- restore original (wrapped by dressing)
+			return vim.ui.select(items, opts, on_choice)
+		end
+		vim.ui.input = function(opts, on_confirm)
+			lazy_load()
+			vim.ui.input = orig_input
+			return vim.ui.input(opts, on_confirm)
+		end
+	end,
 	config = function()
 		require("dressing").setup({
 			input = {
@@ -43,11 +63,9 @@ return {
 				end,
 			},
 			select = {
-				-- Priority list of preferred vim.select implementations
-				backend = { "telescope", "builtin" },
-				telescope = require("telescope.themes").get_dropdown({
-					-- even more opts
-				}),
+				-- Defer telescope; if telescope not loaded fallback to builtin, telescope will augment later
+				backend = { "builtin", "telescope" },
+				-- do not require telescope here to avoid pulling it early
 				builtin = {
 					-- These are passed to nvim_open_win
 					anchor = "NW",

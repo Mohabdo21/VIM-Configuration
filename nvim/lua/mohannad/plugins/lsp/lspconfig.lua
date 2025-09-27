@@ -8,8 +8,11 @@ return {
 		"folke/noice.nvim",
 	},
 	config = function()
-		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
+		-- Neovim 0.11+ only configuration: use core vim.lsp.config interface directly.
+		-- We intentionally drop backward compatibility with the deprecated
+		-- require('lspconfig')[server].setup() framework.
+		-- See :help lspconfig-nvim-0.11
+		pcall(require, "lspconfig.configs") -- ensure configs are discoverable
 
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -81,17 +84,22 @@ return {
 			"csharp_ls", -- C#
 		}
 
-		for _, server in ipairs(servers) do
-			lspconfig[server].setup({
+		-- Helper for new API: define + enable a server
+		local function setup(server, cfg)
+			vim.lsp.config(server, vim.tbl_deep_extend("force", {
 				capabilities = capabilities,
 				on_attach = on_attach,
-			})
+			}, cfg or {}))
+			vim.lsp.enable(server)
 		end
 
-		-- Configure special LSP servers
-		lspconfig["lua_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		-- Basic servers with no extra settings
+		for _, server in ipairs(servers) do
+			setup(server, {})
+		end
+
+		-- Special / custom servers with extra settings
+		setup("lua_ls", {
 			settings = {
 				Lua = {
 					diagnostics = { globals = { "vim" } },
@@ -101,26 +109,22 @@ return {
 			},
 		})
 
-		lspconfig["pyright"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		setup("pyright", {
 			settings = {
 				python = {
 					analysis = {
-						diagnosticMode = "openFilesOnly", -- Only analyze open files
-						autoSearchPaths = true, -- Automatically add common Python paths
-						useLibraryCodeForTypes = true, -- Use library code for type inference
-						autoImportCompletions = true, -- Enable auto-import completions
-						typeCheckingMode = "basic", -- Set type checking mode to "basic"
-						completeFunctionParens = true, -- Complete function parentheses
+						diagnosticMode = "openFilesOnly",
+						autoSearchPaths = true,
+						useLibraryCodeForTypes = true,
+						autoImportCompletions = true,
+						typeCheckingMode = "basic",
+						completeFunctionParens = true,
 					},
 				},
 			},
 		})
 
-		lspconfig["ts_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		setup("ts_ls", {
 			settings = {
 				typescript = {
 					inlayHints = {
@@ -131,13 +135,8 @@ return {
 						includeInlayFunctionLikeReturnTypeHints = true,
 						includeInlayEnumMemberValueHints = true,
 					},
-					suggest = {
-						autoImports = true,
-						completeFunctionCalls = true,
-					},
-					updateImportsOnFileMove = {
-						enabled = "always",
-					},
+					suggest = { autoImports = true, completeFunctionCalls = true },
+					updateImportsOnFileMove = { enabled = "always" },
 				},
 				javascript = {
 					inlayHints = {
@@ -148,95 +147,65 @@ return {
 						includeInlayFunctionLikeReturnTypeHints = true,
 						includeInlayEnumMemberValueHints = true,
 					},
-					suggest = {
-						autoImports = true,
-						completeFunctionCalls = true,
-					},
-					updateImportsOnFileMove = {
-						enabled = "always",
-					},
+					suggest = { autoImports = true, completeFunctionCalls = true },
+					updateImportsOnFileMove = { enabled = "always" },
 				},
 			},
 		})
 
-		lspconfig["tailwindcss"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		setup("tailwindcss", {
 			settings = {
 				tailwindCSS = {
 					experimental = {
 						classRegex = {
 							"tw`([^`]*)",
-							'tw="([^"]*)',
-							'tw={"([^"}]*)',
+							"tw=\"([^\"]*)",
+							"tw={\"([^\"}]*)",
 						},
 					},
 				},
 			},
 		})
 
-		lspconfig["jsonls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		setup("jsonls", {
 			settings = {
 				json = {
 					schemas = {
-						{
-							fileMatch = { "package.json" },
-							url = "https://json.schemastore.org/package.json",
-						},
-						{
-							fileMatch = { "tsconfig.json" },
-							url = "https://json.schemastore.org/tsconfig.json",
-						},
+						{ fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
+						{ fileMatch = { "tsconfig.json" }, url = "https://json.schemastore.org/tsconfig.json" },
 					},
 					validate = { enable = true },
 				},
 			},
 		})
 
-		lspconfig["clangd"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			cmd = {
-				"clangd",
-				"--background-index",
-				"--clang-tidy",
-				"--header-insertion=never",
-			},
+		setup("clangd", {
+			cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
 		})
 
-		lspconfig["dockerls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		setup("dockerls", {
 			settings = {
 				docker = {
-					languageserver = {
-						formatter = {
-							ignoreMultilineInstructions = true,
-						},
-					},
+					languageserver = { formatter = { ignoreMultilineInstructions = true } },
 				},
 			},
 		})
 
-		lspconfig["gopls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		setup("gopls", {
 			settings = {
 				gopls = {
-					completeFunctionCalls = true, -- Complete function calls
-					completeUnimported = true, -- Complete unimported packages
-					sortImports = true, -- Sort imports
-					directoryFilters = { "-.git", "-node_modules" }, -- Exclude .git and node_modules directories
-					memoryMode = "DegradeClosed", -- Use degraded memory mode for closed files
+					completeFunctionCalls = true,
+					completeUnimported = true,
+					sortImports = true,
+					directoryFilters = { "-.git", "-node_modules" },
+					memoryMode = "DegradeClosed",
 					analyses = {
-						unusedparams = true, -- Highlight unused parameters
-						unreachable = true, -- Highlight unreachable code
-						nilness = true, -- Detect nil pointer dereferences
-						unusedwrite = true, -- Highlight unused writes
-						unusedvariable = true, -- Highlight unused variables
-						shadow = true, -- Highlight shadowed variables
+						unusedparams = true,
+						unreachable = true,
+						nilness = true,
+						unusedwrite = true,
+						unusedvariable = true,
+						shadow = true,
 					},
 				},
 			},
