@@ -82,14 +82,18 @@ return {
 			"puppet", -- Puppet
 			"typos_lsp", -- Spell checking
 			"csharp_ls", -- C#
+			"ansiblels", -- Ansible
 		}
 
 		-- Helper for new API: define + enable a server
 		local function setup(server, cfg)
-			vim.lsp.config(server, vim.tbl_deep_extend("force", {
-				capabilities = capabilities,
-				on_attach = on_attach,
-			}, cfg or {}))
+			vim.lsp.config(
+				server,
+				vim.tbl_deep_extend("force", {
+					capabilities = capabilities,
+					on_attach = on_attach,
+				}, cfg or {})
+			)
 			vim.lsp.enable(server)
 		end
 
@@ -159,8 +163,8 @@ return {
 					experimental = {
 						classRegex = {
 							"tw`([^`]*)",
-							"tw=\"([^\"]*)",
-							"tw={\"([^\"}]*)",
+							'tw="([^"]*)',
+							'tw={"([^"}]*)',
 						},
 					},
 				},
