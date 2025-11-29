@@ -1,14 +1,12 @@
+-- Using mini.icons from the full mini.nvim suite instead of standalone
 return {
-	"echasnovski/mini.icons",
-	opts = {},
-	lazy = true,
-	specs = {
-		{ "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
-	},
-	init = function()
-		package.preload["nvim-web-devicons"] = function()
-			require("mini.icons").mock_nvim_web_devicons()
-			return package.loaded["nvim-web-devicons"]
-		end
+	"echasnovski/mini.nvim",
+	version = false,
+	config = function()
+		-- Setup mini.icons from the suite
+		require("mini.icons").setup()
+
+		-- Mock nvim-web-devicons for compatibility with other plugins
+		MiniIcons.mock_nvim_web_devicons()
 	end,
 }

@@ -15,3 +15,12 @@ require("mohannad.lazy")
 vim.cmd("highlight Normal guibg=NONE ctermbg=NONE")
 vim.cmd("highlight NormalNC guibg=NONE ctermbg=NONE")
 vim.cmd("highlight NotifyBackground guibg=#000000")
+
+vim.filetype.add({
+	filename = {
+		["docker-compose.yml"] = "yaml.docker-compose",
+		["docker-compose.yaml"] = "yaml.docker-compose",
+		["compose.yml"] = "yaml.docker-compose",
+		["compose.yaml"] = "yaml.docker-compose",
+	},
+})

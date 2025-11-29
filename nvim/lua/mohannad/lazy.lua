@@ -29,7 +29,7 @@ local function get_python_venv()
 		-- Project virtual environment
 		vim.fn.getcwd() .. "/.venv/bin/python",
 		-- Global virtual environment
-		vim.fn.expand("~/.local/pynvim-venv/bin/python"),
+		vim.fn.expand("/home/mohannad/.pyenv/versions/neovim-py/bin/python"),
 		-- System Python
 		"/usr/bin/python3",
 	}

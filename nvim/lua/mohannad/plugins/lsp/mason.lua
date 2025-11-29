@@ -42,7 +42,7 @@ return {
 				"puppet", -- Puppet
 				"gopls", -- Go
 				"ts_ls", -- TypeScript
-				"typos_lsp", -- Spell checking
+				"tinymist", -- Spell checking
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_enable = false, -- not the same as ensure_installed

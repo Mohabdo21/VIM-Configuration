@@ -13,7 +13,7 @@ return {
 				ignore_install = {},
 				highlight = { enable = true }, -- Enable syntax highlighting
 				indent = { enable = false }, -- Disable Treesitter-based indentation (optional)
-				autotag = { enable = true }, -- Enable autotagging (module lazy-loads internally)
+				-- NOTE: autotag module enable here is deprecated upstream; using dedicated plugin setup instead
 				ensure_installed = { -- Only include parsers you use regularly
 					"json",
 					"javascript",
