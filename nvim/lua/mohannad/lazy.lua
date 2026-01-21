@@ -42,6 +42,11 @@ local function get_python_venv()
 
 		-- Check if pynvim is installed
 		local handle = io.popen(python_path .. " -c 'import pynvim; print(pynvim.__file__)' 2>&1")
+
+		if not handle then
+			return false
+		end
+
 		local result = handle:read("*a")
 		handle:close()
 

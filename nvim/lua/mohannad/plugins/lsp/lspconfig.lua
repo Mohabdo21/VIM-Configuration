@@ -25,7 +25,7 @@ return {
 		}
 
 		-- Shared on_attach function
-		local on_attach = function(client, bufnr)
+		local on_attach = function(_, bufnr)
 			local keymap = vim.keymap
 			local opts = { buffer = bufnr, silent = true }
 

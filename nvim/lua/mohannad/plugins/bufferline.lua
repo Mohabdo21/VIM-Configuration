@@ -24,7 +24,7 @@ return {
 
 			-- Additional options for better usability
 			diagnostics = "nvim_lsp", -- Show LSP diagnostics in the bufferline
-			diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			diagnostics_indicator = function(count, level, _, _)
 				local icon = level:match("error") and " " or " "
 				return " " .. icon .. count
 			end,
