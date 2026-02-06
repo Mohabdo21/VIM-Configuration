@@ -1,65 +1,75 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- Load only when entering a buffer with a filetype that benefits from treesitter
-		event = { "BufReadPost", "BufNewFile" },
+		-- The new nvim-treesitter does NOT support lazy-loading
+		lazy = false,
 		build = ":TSUpdate",
-		dependencies = {},
 		config = function()
-			local treesitter = require("nvim-treesitter.configs")
-			treesitter.setup({
-				modules = {},
-				sync_install = false, -- Disable sync-install to speed up startup
-				ignore_install = {},
-				highlight = { enable = true }, -- Enable syntax highlighting
-				indent = { enable = false }, -- Disable Treesitter-based indentation (optional)
-				-- NOTE: autotag module enable here is deprecated upstream; using dedicated plugin setup instead
-				ensure_installed = { -- Only include parsers you use regularly
-					"json",
-					"javascript",
-					"typescript",
-					"tsx",
-					"yaml",
-					"html",
-					"css",
-					"markdown",
-					"markdown_inline",
-					"bash",
-					"lua",
-					"vim",
-					"dockerfile",
-					"gitignore",
-					"query",
-					"python",
-					"c",
-					"vimdoc",
-					"regex",
-					"go",
-					"htmldjango",
-				},
-				auto_install = true, -- Disable auto-install to speed up startup
-				incremental_selection = { -- Disable if not used
-					enable = false,
-				},
+			-- Minimal setup (install_dir defaults to stdpath('data')/site)
+			require("nvim-treesitter").setup({})
+
+			-- Install parsers (no-op if already installed)
+			require("nvim-treesitter").install({
+				"json",
+				"javascript",
+				"typescript",
+				"tsx",
+				"yaml",
+				"html",
+				"css",
+				"markdown",
+				"markdown_inline",
+				"bash",
+				"lua",
+				"vim",
+				"dockerfile",
+				"gitignore",
+				"query",
+				"python",
+				"c",
+				"vimdoc",
+				"regex",
+				"go",
+				"htmldjango",
 			})
-		end,
-	},
-	-- Defer textobjects until explicitly needed; keep separate spec for clearer control
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		ft = { "lua", "javascript", "typescript", "markdown", "go", "python" },
-		config = function()
-			-- Only configure its submodules; assume base treesitter already set up
-			local ok = pcall(require, "nvim-treesitter.configs")
-			if not ok then
-				return
-			end
-			require("nvim-treesitter.configs").setup({
-				textobjects = {
-					select = { enable = true, lookahead = true },
-					move = { enable = true, set_jumps = true },
-					swap = { enable = true },
-				},
+
+			-- Auto-install parsers when opening a file if a parser is available but not yet installed,
+			-- and enable treesitter highlighting for any filetype with an installed parser
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					local ft = args.match
+					local lang = vim.treesitter.language.get_lang(ft) or ft
+					local parsers = require("nvim-treesitter.parsers")
+
+					-- Auto-install if a parser definition exists but isn't installed yet
+					if parsers[lang] and parsers[lang].install_info then
+						local installed = pcall(vim.treesitter.language.inspect, lang)
+						if not installed then
+							require("nvim-treesitter").install({ lang })
+							-- Poll until the async install finishes, then enable highlighting
+							local buf = args.buf
+							local attempts = 0
+							local timer = vim.uv.new_timer()
+							if timer then
+								timer:start(1000, 2000, vim.schedule_wrap(function()
+									attempts = attempts + 1
+									local ok = pcall(vim.treesitter.language.inspect, lang)
+									if ok or attempts >= 30 then
+										timer:stop()
+										timer:close()
+										if ok and vim.api.nvim_buf_is_valid(buf) then
+											pcall(vim.treesitter.start, buf)
+										end
+									end
+								end))
+							end
+							return
+						end
+					end
+
+					-- Enable highlighting for any filetype with an available parser
+					pcall(vim.treesitter.start)
+				end,
 			})
 		end,
 	},
@@ -67,7 +77,6 @@ return {
 		"windwp/nvim-ts-autotag",
 		ft = { "html", "javascript", "typescript", "tsx", "jsx", "vue" },
 		config = function()
-			pcall(require, "nvim-treesitter.configs") -- ensure base loaded
 			require("nvim-ts-autotag").setup({})
 		end,
 	},
