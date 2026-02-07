@@ -5,7 +5,7 @@ return {
 	version = "*",
 
 	keys = {
-		{ "<leader>bl", "<Cmd>BufferLinePick<CR>",      desc = "Toggle Picker" },
+		{ "<leader>bl", "<Cmd>BufferLinePick<CR>", desc = "Toggle Picker" },
 		{ "<leader>bx", "<Cmd>BufferLinePickClose<CR>", desc = "Pick & Close Buffer" },
 	},
 	opts = {

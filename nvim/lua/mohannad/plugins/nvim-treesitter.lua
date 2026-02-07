@@ -51,17 +51,21 @@ return {
 							local attempts = 0
 							local timer = vim.uv.new_timer()
 							if timer then
-								timer:start(1000, 2000, vim.schedule_wrap(function()
-									attempts = attempts + 1
-									local ok = pcall(vim.treesitter.language.inspect, lang)
-									if ok or attempts >= 30 then
-										timer:stop()
-										timer:close()
-										if ok and vim.api.nvim_buf_is_valid(buf) then
-											pcall(vim.treesitter.start, buf)
+								timer:start(
+									1000,
+									2000,
+									vim.schedule_wrap(function()
+										attempts = attempts + 1
+										local ok = pcall(vim.treesitter.language.inspect, lang)
+										if ok or attempts >= 30 then
+											timer:stop()
+											timer:close()
+											if ok and vim.api.nvim_buf_is_valid(buf) then
+												pcall(vim.treesitter.start, buf)
+											end
 										end
-									end
-								end))
+									end)
+								)
 							end
 							return
 						end

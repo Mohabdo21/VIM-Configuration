@@ -3,7 +3,7 @@ local icons = {
 	[severity.ERROR] = " ",
 	[severity.WARN] = " ",
 	[severity.INFO] = " ",
-	[severity.HINT] = "󰠠 "
+	[severity.HINT] = "󰠠 ",
 }
 
 vim.diagnostic.config({
@@ -20,7 +20,7 @@ vim.diagnostic.config({
 				[severity.ERROR] = "DiagnosticError",
 				[severity.WARN] = "DiagnosticWarn",
 				[severity.INFO] = "DiagnosticInfo",
-				[severity.HINT] = "DiagnosticHint"
+				[severity.HINT] = "DiagnosticHint",
 			}
 			return icons[diag.severity] or "", hl[diag.severity] or "DiagnosticInfo"
 		end,
@@ -31,13 +31,13 @@ vim.diagnostic.config({
 			[severity.ERROR] = "DiagnosticSignError",
 			[severity.WARN] = "DiagnosticSignWarn",
 			[severity.INFO] = "DiagnosticSignInfo",
-			[severity.HINT] = "DiagnosticSignHint"
+			[severity.HINT] = "DiagnosticSignHint",
 		},
 		numhl = {
 			[severity.ERROR] = "DiagnosticSignError",
 			[severity.WARN] = "DiagnosticSignWarn",
 			[severity.INFO] = "DiagnosticSignInfo",
-			[severity.HINT] = "DiagnosticSignHint"
-		}
+			[severity.HINT] = "DiagnosticSignHint",
+		},
 	},
 })

@@ -150,7 +150,14 @@ return {
 		setup("pyright", {
 			cmd = { "pyright-langserver", "--stdio" },
 			filetypes = { "python" },
-			root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "pyrightconfig.json", ".git" },
+			root_markers = {
+				"pyproject.toml",
+				"setup.py",
+				"setup.cfg",
+				"requirements.txt",
+				"pyrightconfig.json",
+				".git",
+			},
 			settings = {
 				python = {
 					analysis = {
@@ -190,7 +197,17 @@ return {
 
 		setup("tailwindcss", {
 			cmd = { "tailwindcss-language-server", "--stdio" },
-			filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+			filetypes = {
+				"html",
+				"css",
+				"scss",
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+				"vue",
+				"svelte",
+			},
 			root_markers = { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts" },
 			settings = {
 				tailwindCSS = {
@@ -212,7 +229,7 @@ return {
 			settings = {
 				json = {
 					schemas = {
-						{ fileMatch = { "package.json" },  url = "https://json.schemastore.org/package.json" },
+						{ fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
 						{ fileMatch = { "tsconfig.json" }, url = "https://json.schemastore.org/tsconfig.json" },
 					},
 					validate = { enable = true },
