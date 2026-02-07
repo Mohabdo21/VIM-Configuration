@@ -70,7 +70,7 @@ return {
 			end,
 		})
 
-		require("diagnostics")
+		require("mohannad.core.diagnostics")
 
 		local function setup(server, cfg)
 			vim.lsp.config(server, cfg or {})
