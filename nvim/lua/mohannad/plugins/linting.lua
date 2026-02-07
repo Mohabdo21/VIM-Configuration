@@ -29,6 +29,22 @@ return {
 		table.insert(lint.linters.pylint.args, 1, "pylint")
 		table.insert(lint.linters.pylint.args, 1, "-m")
 
+		-- Helper: only run linters whose command is available
+		local function try_lint_available()
+			local ft_linters = lint.linters_by_ft[vim.bo.filetype] or {}
+			local available = vim.tbl_filter(function(name)
+				local linter = lint.linters[name]
+				if not linter then
+					return false
+				end
+				local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
+				return cmd and vim.fn.executable(cmd) == 1
+			end, ft_linters)
+			if #available > 0 then
+				lint.try_lint(available)
+			end
+		end
+
 		-- Create an autogroup for linting
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
@@ -37,8 +53,7 @@ return {
 			group = lint_augroup,
 			callback = function()
 				local curpos = vim.api.nvim_win_get_cursor(0)
-				-- Try to lint the buffer
-				lint.try_lint()
+				try_lint_available()
 				if vim.bo.modifiable then
 					vim.cmd([[keeppatterns %s/\s\+$//e]])
 				end
@@ -48,8 +63,7 @@ return {
 
 		-- Set a keybinding for linting the current buffer
 		vim.keymap.set("n", "<leader>l", function()
-			-- Try to lint the current buffer
-			lint.try_lint()
+			try_lint_available()
 		end, { desc = "Trigger linting for current file" })
 	end,
 }

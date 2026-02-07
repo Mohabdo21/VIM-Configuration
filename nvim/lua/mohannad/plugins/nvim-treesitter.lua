@@ -80,11 +80,4 @@ return {
 			require("nvim-ts-autotag").setup({})
 		end,
 	},
-	{ -- Context commentstring when commenting (triggered by plugins like Comment.nvim)
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			require("ts_context_commentstring").setup({})
-		end,
-	},
 }

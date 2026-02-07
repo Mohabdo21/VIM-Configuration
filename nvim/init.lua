@@ -8,6 +8,9 @@
 
 -- Python provider is configured dynamically in lua/mohannad/lazy.lua
 
+-- Ensure Mason bin is in PATH early so linters/formatters are found
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+
 require("mohannad.core")
 require("mohannad.lazy")
 
