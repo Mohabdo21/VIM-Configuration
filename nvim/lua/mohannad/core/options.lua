@@ -5,8 +5,8 @@ local opt = vim.opt -- for conciseness
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
 
 -- tabs & indentation
-opt.tabstop = 4 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 4 -- 2 spaces for indent width
+opt.tabstop = 4       -- 2 spaces for tabs (prettier default)
+opt.shiftwidth = 4    -- 2 spaces for indent width
 opt.expandtab = false -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
@@ -27,7 +27,7 @@ opt.cursorline = false -- highlight the current cursor line
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+opt.signcolumn = "yes"  -- show sign column so that text doesn't shift
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
@@ -44,20 +44,20 @@ opt.swapfile = false
 
 -- enable code folding
 opt.foldmethod = "syntax" -- fold based on syntax
-opt.foldlevel = 0 -- start with all folds closed
+opt.foldlevel = 0         -- start with all folds closed
 
 -- Mouse support
 opt.mouse = "a" -- Enable mouse support in all modes
 
 -- Scrolling
 opt.scrolljump = 5 -- Lines to scroll when the cursor goes off-screen
-opt.scrolloff = 5 -- Lines of context around the cursor
+opt.scrolloff = 5  -- Lines of context around the cursor
 
 -- Status line
 -- opt.laststatus = 2 -- Always show the status line
 
 -- Wild menu (command-line completion)
-opt.wildmenu = true -- Enable wild menu
+opt.wildmenu = true           -- Enable wild menu
 opt.wildmode = "list:longest" -- Command-line completion mode
 
 -- Hidden buffers

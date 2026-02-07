@@ -67,7 +67,6 @@ return {
 						vim.cmd("edit")
 					end, 500)
 				end, opts)
-
 			end,
 		})
 
@@ -213,7 +212,7 @@ return {
 			settings = {
 				json = {
 					schemas = {
-						{ fileMatch = { "package.json" }, url = "https://json.schemastore.org/package.json" },
+						{ fileMatch = { "package.json" },  url = "https://json.schemastore.org/package.json" },
 						{ fileMatch = { "tsconfig.json" }, url = "https://json.schemastore.org/tsconfig.json" },
 					},
 					validate = { enable = true },
@@ -260,6 +259,5 @@ return {
 				},
 			},
 		})
-
 	end,
 }

@@ -23,33 +23,33 @@ return {
 
 		local select_maps = {
 			-- Assignments
-			{ "a=", "@assignment.outer", "Select outer part of an assignment" },
-			{ "i=", "@assignment.inner", "Select inner part of an assignment" },
-			{ "l=", "@assignment.lhs", "Select left hand side of an assignment" },
-			{ "r=", "@assignment.rhs", "Select right hand side of an assignment" },
+			{ "a=", "@assignment.outer",  "Select outer part of an assignment" },
+			{ "i=", "@assignment.inner",  "Select inner part of an assignment" },
+			{ "l=", "@assignment.lhs",    "Select left hand side of an assignment" },
+			{ "r=", "@assignment.rhs",    "Select right hand side of an assignment" },
 			-- Properties (custom capture in after/queries/ecma/textobjects.scm)
-			{ "a:", "@property.outer", "Select outer part of an object property" },
-			{ "i:", "@property.inner", "Select inner part of an object property" },
-			{ "l:", "@property.lhs", "Select left part of an object property" },
-			{ "r:", "@property.rhs", "Select right part of an object property" },
+			{ "a:", "@property.outer",    "Select outer part of an object property" },
+			{ "i:", "@property.inner",    "Select inner part of an object property" },
+			{ "l:", "@property.lhs",      "Select left part of an object property" },
+			{ "r:", "@property.rhs",      "Select right part of an object property" },
 			-- Parameters
-			{ "aa", "@parameter.outer", "Select outer part of a parameter/argument" },
-			{ "ia", "@parameter.inner", "Select inner part of a parameter/argument" },
+			{ "aa", "@parameter.outer",   "Select outer part of a parameter/argument" },
+			{ "ia", "@parameter.inner",   "Select inner part of a parameter/argument" },
 			-- Conditionals
 			{ "ai", "@conditional.outer", "Select outer part of a conditional" },
 			{ "ii", "@conditional.inner", "Select inner part of a conditional" },
 			-- Loops
-			{ "al", "@loop.outer", "Select outer part of a loop" },
-			{ "il", "@loop.inner", "Select inner part of a loop" },
+			{ "al", "@loop.outer",        "Select outer part of a loop" },
+			{ "il", "@loop.inner",        "Select inner part of a loop" },
 			-- Function calls
-			{ "af", "@call.outer", "Select outer part of a function call" },
-			{ "if", "@call.inner", "Select inner part of a function call" },
+			{ "af", "@call.outer",        "Select outer part of a function call" },
+			{ "if", "@call.inner",        "Select inner part of a function call" },
 			-- Function/method definitions
-			{ "am", "@function.outer", "Select outer part of a method/function definition" },
-			{ "im", "@function.inner", "Select inner part of a method/function definition" },
+			{ "am", "@function.outer",    "Select outer part of a method/function definition" },
+			{ "im", "@function.inner",    "Select inner part of a method/function definition" },
 			-- Classes
-			{ "ac", "@class.outer", "Select outer part of a class" },
-			{ "ic", "@class.inner", "Select inner part of a class" },
+			{ "ac", "@class.outer",       "Select outer part of a class" },
+			{ "ic", "@class.inner",       "Select inner part of a class" },
 		}
 
 		for _, map in ipairs(select_maps) do

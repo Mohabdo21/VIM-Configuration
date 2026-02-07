@@ -1,32 +1,43 @@
+local severity = vim.diagnostic.severity
+local icons = {
+	[severity.ERROR] = " ",
+	[severity.WARN] = " ",
+	[severity.INFO] = " ",
+	[severity.HINT] = "󰠠 ",
+}
+
 vim.diagnostic.config({
 	virtual_text = false,
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
-	-- This is the new way to configure diagnostic signs:
+	float = {
+		border = "rounded",
+		source = true,
+		header = "",
+		prefix = function(diag)
+			local hl = {
+				[severity.ERROR] = "DiagnosticError",
+				[severity.WARN] = "DiagnosticWarn",
+				[severity.INFO] = "DiagnosticInfo",
+				[severity.HINT] = "DiagnosticHint",
+			}
+			return icons[diag.severity] or "", hl[diag.severity] or "DiagnosticInfo"
+		end,
+	},
 	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = " ", -- Error icon
-			[vim.diagnostic.severity.WARN] = " ", -- Warn icon
-			[vim.diagnostic.severity.INFO] = " ", -- Info icon
-			[vim.diagnostic.severity.HINT] = "󰠠 ", -- Hint icon
-		},
+		text = icons,
 		hl = {
-			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+			[severity.ERROR] = "DiagnosticSignError",
+			[severity.WARN] = "DiagnosticSignWarn",
+			[severity.INFO] = "DiagnosticSignInfo",
+			[severity.HINT] = "DiagnosticSignHint",
 		},
 		numhl = {
-			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+			[severity.ERROR] = "DiagnosticSignError",
+			[severity.WARN] = "DiagnosticSignWarn",
+			[severity.INFO] = "DiagnosticSignInfo",
+			[severity.HINT] = "DiagnosticSignHint",
 		},
-		-- The default highlight groups usually match 'DiagnosticSign' .. type
-		-- unless you want to override them.
-
-		-- Optional: Set false to disable signs completely, true to use defaults, or the table as above
-		-- enabled = true, -- This is equivalent to providing the 'text' table
 	},
 })

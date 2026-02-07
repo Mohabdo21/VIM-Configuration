@@ -104,8 +104,8 @@ return {
 			-- Optimized source priority (no more luasnip source)
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", priority = 1000 },
-				{ name = "buffer", priority = 500, keyword_length = 3 },
-				{ name = "path", priority = 250 },
+				{ name = "buffer",   priority = 500, keyword_length = 3 },
+				{ name = "path",     priority = 250 },
 			}),
 
 			-- Formatting with inline kind icons (replaces lspkind.nvim)

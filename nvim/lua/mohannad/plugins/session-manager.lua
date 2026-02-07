@@ -8,13 +8,13 @@ return {
 
 		session_manager.setup({
 			sessions_dir = Path:new(vim.fn.stdpath("data"), "sessions"), -- Default session storage location
-			autoload_mode = config.AutoloadMode.Disabled, -- Fully manual session management
-			autosave_last_session = false, -- Disable autosaving on exit/switch
-			autosave_ignore_not_normal = true, -- Ignore if no writable buffers are open
+			autoload_mode = config.AutoloadMode.Disabled,           -- Fully manual session management
+			autosave_last_session = false,                          -- Disable autosaving on exit/switch
+			autosave_ignore_not_normal = true,                      -- Ignore if no writable buffers are open
 			autosave_ignore_filetypes = { "gitcommit", "gitrebase" }, -- Ignore Git buffers
 			autosave_ignore_buftypes = { "nofile", "terminal", "quickfix" }, -- Ignore special buffers
-			autosave_only_in_session = true, -- Only autosave if a session is already active
-			load_include_current = false, -- Hide currently active session in selection
+			autosave_only_in_session = true,                        -- Only autosave if a session is already active
+			load_include_current = false,                           -- Hide currently active session in selection
 		})
 
 		-- Command to restore session for current directory

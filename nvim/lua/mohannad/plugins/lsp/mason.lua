@@ -28,23 +28,23 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"html", -- HTML
-				"cssls", -- CSS
-				"tailwindcss", -- Tailwind CSS
-				"lua_ls", -- Lua
-				"pyright", -- Python
-				"bashls", -- Bash
-				"clangd", -- C/C++
-				"dockerls", -- Dockerfile
+				"html",                -- HTML
+				"cssls",               -- CSS
+				"tailwindcss",         -- Tailwind CSS
+				"lua_ls",              -- Lua
+				"pyright",             -- Python
+				"bashls",              -- Bash
+				"clangd",              -- C/C++
+				"dockerls",            -- Dockerfile
 				"docker_compose_language_service", -- Docker Compose
-				"jsonls", -- JSON
-				"markdown_oxide", -- Markdown
-				"puppet", -- Puppet
-				"gopls", -- Go
-				"ts_ls", -- TypeScript
-				"typos_lsp", -- Typo checking
-				"ansiblels", -- Ansible
-				"tinymist", -- Typst
+				"jsonls",              -- JSON
+				"markdown_oxide",      -- Markdown
+				"puppet",              -- Puppet
+				"gopls",               -- Go
+				"ts_ls",               -- TypeScript
+				"typos_lsp",           -- Typo checking
+				"ansiblels",           -- Ansible
+				"tinymist",            -- Typst
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_enable = false, -- not the same as ensure_installed
