@@ -1,12 +1,9 @@
--- Neovim 0.11+ native LSP configuration (no nvim-lspconfig plugin needed).
+-- Neovim 0.11+ native LSP configuration.
 -- Uses vim.lsp.config() + vim.lsp.enable() exclusively.
--- Loaded via lazy.nvim as a config-only spec so LspAttach keymaps, server
--- configs and diagnostics are all set up when the first buffer is read.
 
 return {
-	-- No plugin — this spec only carries dependencies and a config function.
-	-- lazy.nvim requires a plugin name, so we use nvim-lsp-file-operations which
-	-- we still need, and it becomes the "anchor" for our LSP bootstrap.
+	-- Anchor plugin: lazy.nvim needs a plugin name; nvim-lsp-file-operations
+	-- is a real dependency, so it doubles as the carrier for our LSP config.
 	"antosha417/nvim-lsp-file-operations",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
@@ -17,8 +14,6 @@ return {
 	config = function()
 		require("lsp-file-operations").setup()
 
-		-- Shared capabilities for all servers via the '*' wildcard config.
-		-- This is merged into every server automatically (see :help lsp-config-merge).
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		capabilities.workspace = capabilities.workspace or {}
 		capabilities.workspace.didChangeWatchedFiles = {
@@ -29,12 +24,6 @@ return {
 			capabilities = capabilities,
 		})
 
-		-- Buffer-local keymaps via LspAttach autocmd (replaces the old on_attach pattern).
-		-- Neovim 0.11+ provides built-in defaults for:
-		--   K (hover), [d / ]d (diagnostics), grr (references), gra (code action),
-		--   grn (rename), gri (implementation), grt (type def), gO (document symbols),
-		--   Ctrl-S in insert mode (signature help).
-		-- We only define keymaps that enhance or override the defaults (e.g. Telescope pickers).
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspKeymaps", {}),
 			callback = function(args)
@@ -74,7 +63,6 @@ return {
 					for _, c in ipairs(clients) do
 						vim.lsp.stop_client(c.id)
 					end
-					-- Re-attach after a short delay so servers have time to shut down
 					vim.defer_fn(function()
 						vim.cmd("edit")
 					end, 500)
@@ -83,21 +71,16 @@ return {
 			end,
 		})
 
-		-- Configure diagnostics
 		require("diagnostics")
 
-		-- Helper: define server-specific config + enable.
-		-- Shared capabilities are inherited from the '*' config automatically.
 		local function setup(server, cfg)
 			vim.lsp.config(server, cfg or {})
 			vim.lsp.enable(server)
 		end
 
-		-- Common root markers reused across servers
 		local web_root = { "package.json", "tsconfig.json", ".git" }
 		local git_root = { ".git" }
 
-		-- Basic servers
 		setup("html", {
 			cmd = { "vscode-html-language-server", "--stdio" },
 			filetypes = { "html", "htmldjango" },
@@ -136,7 +119,7 @@ return {
 
 		setup("typos_lsp", {
 			cmd = { "typos-lsp" },
-			-- No filetypes field → attaches to all file types (spell checker)
+			-- No filetypes: attaches globally (spell checker)
 			root_markers = git_root,
 		})
 
@@ -152,7 +135,6 @@ return {
 			root_markers = git_root,
 		})
 
-		-- Special / custom servers with extra settings
 		setup("lua_ls", {
 			cmd = { "lua-language-server" },
 			filetypes = { "lua" },
@@ -184,35 +166,26 @@ return {
 			},
 		})
 
+		local ts_lang_settings = {
+			inlayHints = {
+				includeInlayParameterNameHints = "all",
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+			},
+			suggest = { autoImports = true, completeFunctionCalls = true },
+			updateImportsOnFileMove = { enabled = "always" },
+		}
+
 		setup("ts_ls", {
 			cmd = { "typescript-language-server", "--stdio" },
 			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 			root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 			settings = {
-				typescript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-					suggest = { autoImports = true, completeFunctionCalls = true },
-					updateImportsOnFileMove = { enabled = "always" },
-				},
-				javascript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-					suggest = { autoImports = true, completeFunctionCalls = true },
-					updateImportsOnFileMove = { enabled = "always" },
-				},
+				typescript = ts_lang_settings,
+				javascript = ts_lang_settings,
 			},
 		})
 
