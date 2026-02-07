@@ -1,15 +1,21 @@
+-- Neovim 0.11+ native LSP configuration (no nvim-lspconfig plugin needed).
+-- Uses vim.lsp.config() + vim.lsp.enable() exclusively.
+-- Loaded via lazy.nvim as a config-only spec so LspAttach keymaps, server
+-- configs and diagnostics are all set up when the first buffer is read.
+
 return {
-	"neovim/nvim-lspconfig",
+	-- No plugin — this spec only carries dependencies and a config function.
+	-- lazy.nvim requires a plugin name, so we use nvim-lsp-file-operations which
+	-- we still need, and it becomes the "anchor" for our LSP bootstrap.
+	"antosha417/nvim-lsp-file-operations",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		{ "antosha417/nvim-lsp-file-operations", config = true },
 		"folke/lazydev.nvim",
 		"folke/noice.nvim",
 	},
 	config = function()
-		-- Neovim 0.11+ LSP configuration using native vim.lsp.config + vim.lsp.enable API.
-		-- See :help lsp-config
+		require("lsp-file-operations").setup()
 
 		-- Shared capabilities for all servers via the '*' wildcard config.
 		-- This is merged into every server automatically (see :help lsp-config-merge).
@@ -62,25 +68,23 @@ return {
 				vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 				opts.desc = "Restart LSP"
-				vim.keymap.set("n", "<leader>rs", "<cmd>lsp restart<CR>", opts)
+				vim.keymap.set("n", "<leader>rs", function()
+					local buf = vim.api.nvim_get_current_buf()
+					local clients = vim.lsp.get_clients({ bufnr = buf })
+					for _, c in ipairs(clients) do
+						vim.lsp.stop_client(c.id)
+					end
+					-- Re-attach after a short delay so servers have time to shut down
+					vim.defer_fn(function()
+						vim.cmd("edit")
+					end, 500)
+				end, opts)
+
 			end,
 		})
 
 		-- Configure diagnostics
 		require("diagnostics")
-
-		-- Configure common LSP servers
-		local servers = {
-			"html", -- HTML
-			"cssls", -- CSS
-			"bashls", -- Bash
-			"docker_compose_language_service", -- Docker Compose
-			"markdown_oxide", -- Markdown
-			"puppet", -- Puppet
-			"typos_lsp", -- Spell checking
-			"ansiblels", -- Ansible
-			"tinymist", -- Typst
-		}
 
 		-- Helper: define server-specific config + enable.
 		-- Shared capabilities are inherited from the '*' config automatically.
@@ -89,13 +93,70 @@ return {
 			vim.lsp.enable(server)
 		end
 
-		-- Basic servers with no extra settings
-		for _, server in ipairs(servers) do
-			setup(server, {})
-		end
+		-- Common root markers reused across servers
+		local web_root = { "package.json", "tsconfig.json", ".git" }
+		local git_root = { ".git" }
+
+		-- Basic servers
+		setup("html", {
+			cmd = { "vscode-html-language-server", "--stdio" },
+			filetypes = { "html", "htmldjango" },
+			root_markers = web_root,
+		})
+
+		setup("cssls", {
+			cmd = { "vscode-css-language-server", "--stdio" },
+			filetypes = { "css", "scss", "less" },
+			root_markers = web_root,
+		})
+
+		setup("bashls", {
+			cmd = { "bash-language-server", "start" },
+			filetypes = { "sh", "bash", "zsh" },
+			root_markers = git_root,
+		})
+
+		setup("docker_compose_language_service", {
+			cmd = { "docker-compose-langserver", "--stdio" },
+			filetypes = { "yaml.docker-compose" },
+			root_markers = { "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml" },
+		})
+
+		setup("markdown_oxide", {
+			cmd = { "markdown-oxide" },
+			filetypes = { "markdown" },
+			root_markers = { ".git", ".obsidian" },
+		})
+
+		setup("puppet", {
+			cmd = { "puppet-languageserver", "--stdio" },
+			filetypes = { "puppet" },
+			root_markers = { "manifests", ".git" },
+		})
+
+		setup("typos_lsp", {
+			cmd = { "typos-lsp" },
+			-- No filetypes field → attaches to all file types (spell checker)
+			root_markers = git_root,
+		})
+
+		setup("ansiblels", {
+			cmd = { "ansible-language-server", "--stdio" },
+			filetypes = { "yaml.ansible" },
+			root_markers = { "ansible.cfg", ".ansible-lint", "playbooks", "roles", ".git" },
+		})
+
+		setup("tinymist", {
+			cmd = { "tinymist" },
+			filetypes = { "typst" },
+			root_markers = git_root,
+		})
 
 		-- Special / custom servers with extra settings
 		setup("lua_ls", {
+			cmd = { "lua-language-server" },
+			filetypes = { "lua" },
+			root_markers = { ".luarc.json", ".luarc.jsonc", ".stylua.toml", "stylua.toml", ".git" },
 			settings = {
 				Lua = {
 					diagnostics = { globals = { "vim" } },
@@ -106,6 +167,9 @@ return {
 		})
 
 		setup("pyright", {
+			cmd = { "pyright-langserver", "--stdio" },
+			filetypes = { "python" },
+			root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "pyrightconfig.json", ".git" },
 			settings = {
 				python = {
 					analysis = {
@@ -121,6 +185,9 @@ return {
 		})
 
 		setup("ts_ls", {
+			cmd = { "typescript-language-server", "--stdio" },
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 			settings = {
 				typescript = {
 					inlayHints = {
@@ -150,6 +217,9 @@ return {
 		})
 
 		setup("tailwindcss", {
+			cmd = { "tailwindcss-language-server", "--stdio" },
+			filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+			root_markers = { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts" },
 			settings = {
 				tailwindCSS = {
 					experimental = {
@@ -164,6 +234,9 @@ return {
 		})
 
 		setup("jsonls", {
+			cmd = { "vscode-json-language-server", "--stdio" },
+			filetypes = { "json", "jsonc" },
+			root_markers = git_root,
 			settings = {
 				json = {
 					schemas = {
@@ -177,9 +250,14 @@ return {
 
 		setup("clangd", {
 			cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
+			filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+			root_markers = { "compile_commands.json", "compile_flags.txt", ".clangd", ".git" },
 		})
 
 		setup("dockerls", {
+			cmd = { "docker-langserver", "--stdio" },
+			filetypes = { "dockerfile" },
+			root_markers = { "Dockerfile", ".git" },
 			settings = {
 				docker = {
 					languageserver = { formatter = { ignoreMultilineInstructions = true } },
@@ -188,6 +266,9 @@ return {
 		})
 
 		setup("gopls", {
+			cmd = { "gopls" },
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			root_markers = { "go.mod", "go.work", ".git" },
 			settings = {
 				gopls = {
 					completeFunctionCalls = true,
@@ -206,5 +287,6 @@ return {
 				},
 			},
 		})
+
 	end,
 }
