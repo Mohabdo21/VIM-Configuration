@@ -1,6 +1,6 @@
 return {
 	"williamboman/mason.nvim",
-	event = "BufReadPre",
+	event = { "BufReadPre", "VeryLazy" },
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -64,7 +64,6 @@ return {
 				"markdownlint", -- Markdown linter
 				"yamllint", -- YAML linter
 				"golangci-lint", -- Go linter
-				"puppet-lint", -- Puppet linter
 				"sqlfluff", -- SQL linter
 				"sqlfmt", -- SQL formatter
 			},
