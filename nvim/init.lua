@@ -24,5 +24,6 @@ vim.filetype.add({
 		["docker-compose.yaml"] = "yaml.docker-compose",
 		["compose.yml"] = "yaml.docker-compose",
 		["compose.yaml"] = "yaml.docker-compose",
+		["Caddyfile"] = "caddy",
 	},
 })
