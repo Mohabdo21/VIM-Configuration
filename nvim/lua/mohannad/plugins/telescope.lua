@@ -8,7 +8,7 @@ return {
 		"joshmedeski/telescope-smart-goto.nvim", -- Smart goto extension
 		"nvim-telescope/telescope-live-grep-args.nvim", -- Live grep with arguments
 		"debugloop/telescope-undo.nvim", -- Undo history extension
-		"nvim-telescope/telescope-fzf-native.nvim", -- FZF sorter
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- FZF sorter
 		"nvim-telescope/telescope-ui-select.nvim", -- UI select extension
 		"aaronhallaert/advanced-git-search.nvim", -- Advanced git search
 		"MunifTanjim/nui.nvim", -- UI component library

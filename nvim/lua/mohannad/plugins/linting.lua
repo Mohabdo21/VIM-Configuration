@@ -15,14 +15,19 @@ return {
 			typescript = { "eslint" },
 			javascriptreact = { "eslint" },
 			typescriptreact = { "eslint" },
-			svelte = { "eslint_d" },
 			python = { "pylint" },
+			go = { "golangcilint" },
 			puppet = { "puppet-lint" },
 			bash = { "shellcheck" },
 			markdown = { "markdownlint" },
 			yaml = { "yamllint" },
 			sql = { "sqlfluff" },
 		}
+
+		-- Customize the pylint linter
+		lint.linters.pylint.cmd = "python"
+		table.insert(lint.linters.pylint.args, 1, "pylint")
+		table.insert(lint.linters.pylint.args, 1, "-m")
 
 		-- Create an autogroup for linting
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
