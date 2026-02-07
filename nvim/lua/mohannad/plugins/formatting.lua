@@ -16,7 +16,6 @@ return {
 				typescript = { "prettier", "eslint_d" }, -- Added eslint_d for TypeScript
 				javascriptreact = { "prettier", "eslint_d" }, -- Added eslint_d for JSX
 				typescriptreact = { "prettier", "eslint_d" }, -- Added eslint_d for TSX
-				svelte = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },

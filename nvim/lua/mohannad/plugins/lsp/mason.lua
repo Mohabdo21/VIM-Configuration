@@ -42,7 +42,9 @@ return {
 				"puppet", -- Puppet
 				"gopls", -- Go
 				"ts_ls", -- TypeScript
-				"tinymist", -- Spell checking
+				"typos_lsp", -- Typo checking
+				"ansiblels", -- Ansible
+				"tinymist", -- Typst
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_enable = false, -- not the same as ensure_installed
@@ -62,6 +64,9 @@ return {
 				"markdownlint", -- Markdown linter
 				"yamllint", -- YAML linter
 				"golangci-lint", -- Go linter
+				"puppet-lint", -- Puppet linter
+				"sqlfluff", -- SQL linter
+				"sqlfmt", -- SQL formatter
 			},
 		})
 	end,

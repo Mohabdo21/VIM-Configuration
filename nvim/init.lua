@@ -6,8 +6,7 @@
 -- pip install --upgrade pynvim
 -- python -c "import pynvim, sys; print('pynvim', pynvim.__version__, 'python', sys.executable)"
 
--- Pin Neovim Python provider to dedicated pyenv virtualenv
-vim.g.python3_host_prog = "/home/mohannad/.pyenv/versions/neovim-py/bin/python"
+-- Python provider is configured dynamically in lua/mohannad/lazy.lua
 
 require("mohannad.core")
 require("mohannad.lazy")

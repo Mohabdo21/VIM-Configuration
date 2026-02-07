@@ -78,8 +78,8 @@ return {
 			"markdown_oxide", -- Markdown
 			"puppet", -- Puppet
 			"typos_lsp", -- Spell checking
-			"csharp_ls", -- C#
 			"ansiblels", -- Ansible
+			"tinymist", -- Typst
 		}
 
 		-- Helper: define server-specific config + enable.
