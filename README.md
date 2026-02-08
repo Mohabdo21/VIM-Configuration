@@ -1,291 +1,291 @@
 # Neovim Configuration
 
-This repository contains my personal Neovim configuration. It's set up to provide a richly featured, visually pleasing, and efficient text editing environment.
+Neovim 0.11+ config. Native features first, plugins only when they do something Neovim can't.
+
+## What's Gone
+
+Neovim 11 killed the need for these. They're removed:
+
+- **LuaSnip / friendly-snippets** → native `vim.snippet`
+- **nvim-lspconfig** → native `vim.lsp.config()` + `vim.lsp.enable()`
+- **comment.nvim** → native commenting (`gc`)
+- **dressing.nvim** → noice.nvim + `vim.ui.select`
+- **lspkind.nvim** → kind icons defined inline in nvim-cmp
+- **none-ls / null-ls** → conform.nvim (formatting) + nvim-lint (linting)
 
 ## Structure
 
-The configuration is organized as follows:
-
-- `init.lua`: This is the main configuration file that sources all other configuration files.
-- `lazy-lock.json`: This file contains settings for the lazy-lock plugin.
-- `lua/mohannad`: This directory contains all the Lua configuration files.
-  - `core`: This directory contains core configuration files such as keymaps and options.
-  - `lazy.lua`: This file contains configuration for lazy loading of plugins.
-  - `plugins`: This directory contains configuration files for each individual plugin.
+```
+nvim/
+├── init.lua                  Entry point: PATH, core requires, filetype rules
+├── coc-settings.json         CoC settings (disabled, kept for reference)
+└── lua/mohannad/
+    ├── lazy.lua              lazy.nvim bootstrap, Python provider auto-detection
+    ├── core/
+    │   ├── init.lua          Loads keymaps + options
+    │   ├── keymaps.lua       Keybindings (leader = Space)
+    │   ├── options.lua       Editor options
+    │   └── diagnostics.lua   Diagnostic config (signs, floats, severity)
+    └── plugins/
+        ├── init.lua          Always loaded: plenary, vim-tmux-navigator, copilot
+        ├── lsp/
+        │   ├── lspconfig.lua Native LSP (vim.lsp.config/enable) + keymaps
+        │   └── mason.lua     Mason: auto-install servers/tools
+        └── ...               Everything else
+```
 
 ## Plugins
 
-The configuration uses a variety of plugins to enhance Neovim's functionality. Here are some of the key plugins:
+### LSP & Completion
 
-- `alpha-nvim.lua`: Alpha Nvim is a start screen plugin for Neovim.
-- `auto-session.lua`: Auto Session is a plugin that allows you to save and load your Neovim sessions automatically.
-- `bufferline.lua`: Bufferline is a plugin that provides a tab-like interface for managing buffers.
-- `coc.lua`: Conquer of Completion (CoC) is a powerful autocompletion plugin with language server protocol support.
-- `colorizer.lua`: Colorizer is a plugin that colorizes color codes in your code.
-- `colorscheme.lua`: This file is used to configure the colorscheme of your Neovim.
-- `comment.lua`: This plugin provides functionalities to comment and uncomment lines of code.
-- `dressing.lua`: Dressing is a plugin that helps to manage and navigate between different windows in Neovim.
-- `formatting.lua`: This plugin provides code formatting capabilities.
-- `friendly-snippets.lua`: Friendly Snippets is a plugin that provides a collection of snippets for various programming languages.
-- `gitsigns.lua`: GitSigns is a plugin that shows git diff markers in the sign column and stages changes via the buffer.
-- `harpoon.lua`: Harpoon is a plugin that provides mark and navigation functionalities.
-- `lazygit.lua`: LazyGit is a simple terminal UI for git commands.
-- `linting.lua`: This plugin provides linting capabilities in Neovim.
-- `lsp`: This directory contains configurations for the Language Server Protocol (LSP), which provides features like autocompletion, go to definition, and hover documentation.
-- `lua-snip.lua`: Lua Snip is a fast snippet engine for Neovim.
-- `lualine.lua`: Lualine is a lightweight and configurable status line plugin for Neovim.
-- `neogen.lua`: Neogen is a plugin that helps you generate JSDoc comments.
-- `nvim-autopairs.lua`: Nvim Autopairs is a plugin that automatically pairs brackets, quotes, etc.
-- `nvim-cmp.lua`: Nvim Cmp is an autocompletion plugin for Neovim.
-- `nvim-surround.lua`: Nvim Surround is a plugin that provides functionalities to deal with pairs of "surroundings".
-- `nvim-tree.lua`: Nvim Tree is a file explorer tree for Neovim.
-- `nvim-treesitter-text-objects.lua`: This plugin provides text objects based on the Treesitter AST.
-- `nvim-treesitter.lua`: Nvim Treesitter is a plugin that provides syntax highlighting and other features based on the Treesitter parsing library.
-- `nvim-web-devicons.lua`: Nvim Web Devicons is a plugin that provides icons for file types.
-- `substitute.lua`: This plugin provides functionalities to substitute text.
-- `telescope.lua`: Telescope is a highly extendable fuzzy finder over lists.
-- `todo-comments.lua`: Todo Comments is a plugin that provides functionalities to manage TODO comments.
-- `vim-maximizer.lua`: Vim Maximizer is a plugin that maximizes and minimizes windows in Vim.
-- `which-key.lua`: Which Key is a plugin that displays available keybindings in popup menu.
+LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim-lspconfig. Snippets use native `vim.snippet`.
 
-## LSP
+| Plugin                                                          | What it does                                   |
+| --------------------------------------------------------------- | ---------------------------------------------- |
+| **mason.nvim** + **mason-lspconfig** + **mason-tool-installer** | Auto-installs LSP servers, formatters, linters |
+| **nvim-lsp-file-operations**                                    | LSP-aware file rename/move                     |
+| **nvim-cmp**                                                    | Completion (LSP, buffer, path, cmdline)        |
+| **nvim-autopairs**                                              | Auto-close brackets/quotes                     |
+| **lazydev.nvim**                                                | Lua LSP: `vim.*` type hints                    |
 
-The configuration also includes setup for various Language Server Protocols (LSPs) to provide features like autocompletion, formatting, and linting for various programming languages.
+**Language servers:** html, cssls, tailwindcss, ts_ls, lua_ls, pyright, bashls, clangd, dockerls, docker_compose_language_service, jsonls, markdown_oxide, puppet, gopls, typos_lsp, ansiblels, tinymist.
 
-## System Dependencies
+### Formatting & Linting
 
-This Neovim configuration requires several system dependencies to function correctly. Below is a comprehensive list of the required dependencies, categorized by their usage:
+| Plugin           | What it does                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------- |
+| **conform.nvim** | Format on save — prettier, eslint_d, stylua, isort, black, clang-format, shfmt, sqlfmt, gofmt, rustfmt  |
+| **nvim-lint**    | Async lint — eslint_d, pylint, golangci-lint, puppet-lint, shellcheck, markdownlint, yamllint, sqlfluff |
 
-### General Requirements
+### Navigation
 
-1. **Neovim**: You should be running Neovim v0.9.0 or later.
-2. **Git**: Many Neovim plugins are hosted on GitHub and are installed via Git. Ensure you have Git installed, preferably version 2.19.0 or later for partial clone support.
-3. **Python**: Some plugins may require Python and the associated package manager pip. You may also need certain Python packages like `autopep8`, `black`, and `isort` for Python formatting and linting.
-4. **Node.js and npm**: Required for plugins written in JavaScript or TypeScript, or for those providing language servers for JavaScript or TypeScript.
-5. **Rust**: Required for plugins written in Rust or providing Rust language server support. Ensure you have Rust and its package manager Cargo installed.
-6. **Go**: Required for plugins written in Go or providing Go language server support. Ensure you have Go installed.
-7. **ShellCheck**: Required for shell script linting.
-8. **CMake and build-essential**: Required for building some plugins from source.
-9. **FUSE libraries**: Required for certain plugins.
-10. **A Nerd Font**: Required for plugins that add icons to Neovim, such as `nvim-web-devicons`.
+| Plugin                       | What it does                                           |
+| ---------------------------- | ------------------------------------------------------ |
+| **telescope.nvim**           | Fuzzy finder: files, grep, buffers, symbols, git, undo |
+| **telescope-fzf-native**     | Native FZF sorting                                     |
+| **telescope-live-grep-args** | Grep with rg flags                                     |
+| **telescope-undo**           | Undo history browser                                   |
+| **telescope-ui-select**      | Routes `vim.ui.select` through Telescope               |
+| **telescope-smart-goto**     | Smart goto                                             |
+| **advanced-git-search**      | Git log/diff search                                    |
+| **harpoon**                  | File bookmarks                                         |
 
-### Plugin-Specific Dependencies
+### Treesitter
 
-1. **Alpha Nvim (`alpha-nvim.lua`)**: No additional dependencies.
-2. **Auto Session (`auto-session.lua`)**: No additional dependencies.
-3. **Bufferline (`bufferline.lua`)**: No additional dependencies.
-4. **CoC (`coc.lua`)**:
-   - **Node.js**: `npm install -g neovim`
-   - Install language servers and extensions via `:CocInstall`.
-5. **Colorizer (`colorizer.lua`)**: No additional dependencies.
-6. **Colorscheme (`colorscheme.lua`)**: Specific colorschemes may require their own installation.
-7. **Comment (`comment.lua`)**: No additional dependencies.
-8. **Dressing (`dressing.lua`)**: No additional dependencies.
-9. **Formatting (`formatting.lua`)**:
-   - **Python**: `pip install black autopep8 isort`
-   - **Node.js**: `npm install -g prettier eslint`
-   - **Rust**: `cargo install rustfmt`
-   - **Go**: `go get -u golang.org/x/tools/cmd/goimports`
-10. **Friendly Snippets (`friendly-snippets.lua`)**: No additional dependencies.
-11. **GitSigns (`gitsigns.lua`)**:
-    - **Git**: Ensure Git is installed.
-12. **Harpoon (`harpoon.lua`)**: No additional dependencies.
-13. **LazyGit (`lazygit.lua`)**:
-    - **LazyGit**: `brew install lazygit` (macOS) or follow installation instructions for other OS.
-14. **Linting (`linting.lua`)**:
-    - **Python**: `pip install pylint`
-    - **Node.js**: `npm install -g eslint`
-15. **LSP (`lsp`)**:
-    - **Language Servers**: Install language servers using `:LspInstall` or manually.
-    - **Python**: `pip install pylsp`
-    - **Node.js**: `npm install -g typescript typescript-language-server`
-    - **Rust**: `rustup component add rls rust-analysis rust-src`
-    - **Go**: `go get -u golang.org/x/tools/gopls`
-16. **LuaSnip (`lua-snip.lua`)**: No additional dependencies.
-17. **Lualine (`lualine.lua`)**: No additional dependencies.
-18. **Neogen (`neogen.lua`)**: No additional dependencies.
-19. **Nvim Autopairs (`nvim-autopairs.lua`)**: No additional dependencies.
-20. **Nvim Cmp (`nvim-cmp.lua`)**: No additional dependencies.
-21. **Nvim Surround (`nvim-surround.lua`)**: No additional dependencies.
-22. **Nvim Tree (`nvim-tree.lua`)**:
-    - **Nerd Font**: Install a Nerd Font for file icons.
-23. **Nvim Treesitter (`nvim-treesitter.lua`, `nvim-treesitter-text-objects.lua`)**:
-    - **C Compiler**: Ensure you have a C compiler installed (e.g., `gcc` or `clang`).
-24. **Nvim Web Devicons (`nvim-web-devicons.lua`)**:
-    - **Nerd Font**: Install a Nerd Font for file icons.
-25. **Substitute (`substitute.lua`)**: No additional dependencies.
-26. **Telescope (`telescope.lua`)**:
-    - **Ripgrep**: `brew install ripgrep` (macOS) or follow installation instructions for other OS.
-    - **fd**: `brew install fd` (macOS) or follow installation instructions for other OS.
-27. **Todo Comments (`todo-comments.lua`)**: No additional dependencies.
-28. **Vim Maximizer (`vim-maximizer.lua`)**: No additional dependencies.
-29. **Which Key (`which-key.lua`)**: No additional dependencies.
+| Plugin                          | What it does                                           |
+| ------------------------------- | ------------------------------------------------------ |
+| **nvim-treesitter**             | Highlighting + auto-install parsers                    |
+| **nvim-treesitter-textobjects** | Select/swap/move by function, class, conditional, loop |
+| **nvim-ts-autotag**             | Auto-close HTML/JSX tags                               |
+| **nvim-various-textobjs**       | Repeatable `;` and `,` motions                         |
+
+### UI
+
+| Plugin                                | What it does                                  |
+| ------------------------------------- | --------------------------------------------- |
+| **github-nvim-theme**                 | Colorscheme (`github_dark_default`)           |
+| **lualine**                           | Statusline — mode colors, diagnostics, clock  |
+| **bufferline**                        | Tab bar with LSP diagnostics                  |
+| **alpha-nvim**                        | Dashboard                                     |
+| **nvim-tree**                         | File explorer                                 |
+| **noice** + **nvim-notify** + **nui** | Modern cmdline, messages, notifications       |
+| **which-key**                         | Keybinding popup                              |
+| **nvim-highlight-colors**             | Inline color rendering (hex, named, Tailwind) |
+| **nvim-colorizer**                    | Color code highlighting                       |
+| **mini.nvim**                         | Icons (mocks nvim-web-devicons)               |
+| **nvim-web-devicons**                 | Filetype icons                                |
+| **render-markdown**                   | Rich markdown rendering                       |
+
+### Git
+
+| Plugin       | What it does                               |
+| ------------ | ------------------------------------------ |
+| **gitsigns** | Diff signs, hunk stage/reset, inline blame |
+| **lazygit**  | Git TUI (`<leader>lg`)                     |
+
+### Editing
+
+| Plugin            | What it does                                         |
+| ----------------- | ---------------------------------------------------- |
+| **nvim-surround** | Surround pairs                                       |
+| **substitute**    | Operator-based substitution                          |
+| **neogen**        | Generate doc comments (JSDoc, Google, Doxygen, etc.) |
+| **todo-comments** | Highlight/search TODO, FIXME, HACK                   |
+
+### Sessions
+
+| Plugin                     | What it does                                            |
+| -------------------------- | ------------------------------------------------------- |
+| **neovim-session-manager** | Manual session save/load/delete                         |
+| **auto-session**           | Auto session save/restore (auto-restore off by default) |
+
+### Other
+
+| Plugin                 | What it does                          |
+| ---------------------- | ------------------------------------- |
+| **plenary**            | Lua utility library (dependency)      |
+| **vim-tmux-navigator** | Tmux ↔ Neovim split navigation        |
+| **copilot.vim**        | GitHub Copilot (`Alt-l` to accept)    |
+| **vim-maximizer**      | Maximize/restore split (`<leader>sm`) |
+| **undotree**           | Undo tree (`F5`)                      |
+
+## Key Bindings
+
+Leader is **Space**. This is not exhaustive — run `<leader>fk` or `<leader>?` to see everything.
+
+### General
+
+| Key                               | Action                                         |
+| --------------------------------- | ---------------------------------------------- |
+| `jk`                              | Exit insert mode                               |
+| `<leader>nh`                      | Clear search highlights                        |
+| `<leader>+` / `-`                 | Increment / decrement number                   |
+| `<leader>sv` / `sh` / `se` / `sx` | Split vertical / horizontal / equalize / close |
+| `<leader>sm`                      | Maximize/restore split                         |
+
+### Files & Search
+
+| Key                 | Action                                  |
+| ------------------- | --------------------------------------- |
+| `<leader>ee` / `ef` | Toggle explorer / find file in explorer |
+| `<leader>ff`        | Find files                              |
+| `<leader>fg`        | Live grep (with args)                   |
+| `<leader>fc`        | Grep in cwd                             |
+| `<leader>fb`        | Buffers                                 |
+| `<leader>fr`        | Recent files                            |
+| `<leader>fs`        | Document symbols                        |
+| `<leader>fw`        | Grep word under cursor                  |
+| `<leader>ft`        | TODOs                                   |
+| `<leader>fk`        | Keymaps                                 |
+| `<leader>/`         | Fuzzy search in buffer                  |
+
+### LSP
+
+| Key                       | Action                                     |
+| ------------------------- | ------------------------------------------ |
+| `gd` / `gD`               | Definition / declaration                   |
+| `gR` / `gi` / `gt`        | References / implementations / type defs   |
+| `<leader>ca`              | Code action                                |
+| `<leader>rn`              | Rename                                     |
+| `<leader>D` / `<leader>d` | Buffer diagnostics / line diagnostic float |
+| `<leader>rs`              | Restart LSP                                |
+| `<leader>mp`              | Format file (or visual range)              |
+| `<leader>l`               | Lint current file                          |
+
+### Git
+
+| Key                        | Action                 |
+| -------------------------- | ---------------------- |
+| `<leader>lg`               | LazyGit                |
+| `<leader>hs` / `hr`        | Stage / reset hunk     |
+| `<leader>hS` / `hR`        | Stage / reset buffer   |
+| `<leader>hp` / `hb` / `hd` | Preview / blame / diff |
+| `]c` / `[c`                | Next / prev hunk       |
+
+### Harpoon
+
+| Key                 | Action             |
+| ------------------- | ------------------ |
+| `<leader>hm`        | Mark file          |
+| `<leader>hn` / `hp` | Next / prev mark   |
+| `<leader>he`        | Remove mark        |
+| `<leader>hq`        | Marks in Telescope |
+
+### Neogen
+
+| Key                               | Action                                       |
+| --------------------------------- | -------------------------------------------- |
+| `<leader>nf` / `nc` / `nt` / `nn` | Generate function / class / type / file docs |
+
+## Dependencies
+
+### Required
+
+| What                                  | Why                                        |
+| ------------------------------------- | ------------------------------------------ |
+| **Neovim 0.11+**                      | Native LSP config, snippets, commenting    |
+| **Git 2.19+**                         | Plugins, gitsigns, lazygit                 |
+| **Nerd Font**                         | Icons                                      |
+| **C compiler** (gcc/clang) + **make** | Treesitter parsers, telescope-fzf-native   |
+| **Node.js + npm**                     | LSP servers, prettier, eslint_d            |
+| **neovim** npm package                | Node.js provider (`npm install -g neovim`) |
+| **Python 3.8+** + **pip**             | Python provider, black, isort, pylint      |
+| **pynvim**                            | Python provider (`pip install pynvim`)     |
+| **ripgrep**                           | Telescope grep                             |
+| **fd**                                | Telescope file finder                      |
+| **LazyGit**                           | Git TUI                                    |
+
+### Optional
+
+| What                                        | Why                                                     |
+| ------------------------------------------- | ------------------------------------------------------- |
+| [**pyenv**](https://github.com/pyenv/pyenv) | Manage the `neovim-py` virtualenv (recommended)         |
+| [**nvm**](https://github.com/nvm-sh/nvm)    | Manage Node.js versions (recommended)                   |
+| **tmux**                                    | Only matters if you use vim-tmux-navigator              |
+| **Go**                                      | gopls, gofmt, golangci-lint                             |
+| **Rust** + `rustup component add rustfmt`   | rustfmt                                                 |
+| **luarocks**                                | Native Lua C modules (config adds luarocks to cpath)    |
+| **puppet-lint** (`gem install`)             | Not managed by Mason                                    |
+| **GitHub Copilot** subscription             | copilot.vim is always loaded; `:Copilot auth` to set up |
+
+Mason auto-installs most LSP servers, formatters, and linters. Exceptions: **pynvim** (pip), **puppet-lint** (gem), **gofmt** (ships with Go), **rustfmt** (rustup).
 
 ## Installation
 
-### On Ubuntu
+```bash
+git clone https://github.com/Mohabdo21/VIM-Configuration.git
+cd VIM-Configuration
+mv ~/.config/nvim ~/.config/nvim.bak
+cp -r ./nvim ~/.config/
+nvim  # lazy.nvim handles the rest
+```
 
-1. **Install Neovim**
+### Python Provider
 
-   ```bash
-   sudo apt update
-   sudo apt install neovim
-   ```
+The config auto-detects a Python with `pynvim`, checking in order:
 
-   If you faced any issues refer to official nvim [repo](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)
+1. `$VIRTUAL_ENV/bin/python`
+2. `<cwd>/.venv/bin/python`
+3. `~/.pyenv/versions/neovim-py/bin/python`
+4. System `python3`
 
-2. **Install Git**
+Re-checks on `DirChanged`, so project venvs work automatically.
 
-   ```bash
-   sudo apt install git
-   ```
+One-time setup:
 
-3. **Install Python and pip**
+```bash
+pyenv install -s 3.12.3
+pyenv virtualenv 3.12.3 neovim-py
+pyenv activate neovim-py
+pip install --upgrade pip pynvim
+```
 
-   ```bash
-   sudo apt install python3 python3-pip
-   ```
+Verify: `python -c "import pynvim; print(pynvim.__version__)"`
 
-4. **Install Node.js and npm**
+### Node.js Provider
 
-   ```bash
-   sudo apt install nodejs npm
-   ```
+```bash
+npm install -g neovim
+```
 
-5. **Install Rust**
+With nvm:
 
-   ```bash
-   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-   ```
+```bash
+nvm install --lts && nvm use --lts
+npm install -g neovim
+```
 
-6. **Install Go**
+Verify: `:checkhealth provider`
 
-   ```bash
-   sudo apt install golang
-   ```
+### Updating Neovim (AppImage)
 
-7. **Install ShellCheck**
+```bash
+chmod +x update_nvim.sh && ./update_nvim.sh
+```
 
-   ```bash
-   sudo apt install shellcheck
-   ```
+## Notes
 
-8. **Install CMake and build-essential**
-
-   ```bash
-   sudo apt install cmake build-essential
-   ```
-
-9. **Install FUSE libraries**
-
-   ```bash
-   sudo apt install fuse
-   ```
-
-10. **Install a Nerd Font**
-
-    Download and install a Nerd Font from [Nerd Fonts GitHub](https://github.com/ryanoasis/nerd-fonts/releases).
-
-### On macOS
-
-1. **Install Neovim**
-
-   ```bash
-   brew install neovim
-   ```
-
-   If you faced any issues refer to official nvim [repo](https://github.com/neovim/neovim/blob/master/INSTALL.md#install-from-download)
-
-2. **Install Git**
-
-   ```bash
-   brew install git
-   ```
-
-3. **Install Python and pip**
-
-   ```bash
-   brew install python
-   ```
-
-4. **Install Node.js and npm**
-
-   ```bash
-   brew install node
-   ```
-
-5. **Install Rust**
-
-   ```bash
-   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-   ```
-
-6. **Install Go**
-
-   ```bash
-   brew install go
-   ```
-
-7. **Install ShellCheck**
-
-   ```bash
-   brew install shellcheck
-   ```
-
-8. **Install CMake and build-essential**
-
-   ```bash
-   brew install cmake
-   ```
-
-9. **Install a Nerd Font**
-
-   Download and install a Nerd Font from [Nerd Fonts GitHub](https://github.com/ryanoasis/nerd-fonts/releases).
-
-## Usage
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/Mohabdo21/VIM-Configuration.git
-   cd VIM-Configuration
-   ```
-
-2. **Backup Your Current Neovim Configuration**
-
-   ```bash
-   mv ~/.config/nvim ~/.config/nvim.bak
-   ```
-
-3. **Copy the New Configuration**
-
-   ```bash
-   cp -r ./nvim ~/.config/
-   ```
-
-4. **Run Neovim**
-
-   ```bash
-   nvim
-   ```
-
-### Update you Neovim (AppImage)
-
-Update Script
-
-A script named `update_nvim.sh` has been added to simplify updating Neovim binary if not installed via package manager.
-
-- **Usage:**
-
-To run the update script make sure it's executable `chmod +x`, then execute the following command from the repository's root directory:
-
-`./update_nvim.sh`
-
-This script will check for the neovim updates and update you current installation.
-
-### Notes
-
-- Ensure you follow the official installation instructions for dependencies based on your operating system.
-- The listed dependencies are comprehensive but may require adjustments based on specific plugins or updates to the configuration.
-
-This configuration is personalized to my own usage. Feel free to modify it to suit your needs.
+- Mason installs servers/formatters/linters on first launch. Just open Neovim.
+- CoC config exists in the tree but is disabled (`lazy = true`). Reference only.
+- Perl and Ruby providers are explicitly disabled.
+- This is a personal config. Fork it, gut it, make it yours.
