@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("neogen").setup({
 			enabled = true, -- Enable the plugin
-			snippet_engine = "luasnip", -- Use LuaSnip for snippet engine
+			snippet_engine = "nvim", -- Use Neovim's built-in snippet engine (0.10+)
 			languages = {
 				python = {
 					template = {

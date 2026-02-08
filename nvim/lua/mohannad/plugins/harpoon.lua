@@ -21,7 +21,7 @@ return {
 		)
 		keymap.set(
 			"n",
-			"<leader>hp",
+			"<leader>hP",
 			"<cmd>lua require('harpoon.ui').nav_prev()<cr>",
 			{ desc = "Go to previous harpoon mark" }
 		)

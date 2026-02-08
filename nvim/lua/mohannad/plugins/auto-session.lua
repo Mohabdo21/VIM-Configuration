@@ -16,8 +16,8 @@ return {
 		})
 
 		-- Keybinding to manually load the session lens and search for sessions
-		vim.keymap.set("n", "<leader>ls", function()
+		vim.keymap.set("n", "<leader>as", function()
 			require("auto-session.session-lens").search_session()
-		end, { noremap = true })
+		end, { noremap = true, desc = "Search sessions (auto-session)" })
 	end,
 }

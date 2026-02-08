@@ -72,12 +72,12 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 
 ### Treesitter
 
-| Plugin                          | What it does                                           |
-| ------------------------------- | ------------------------------------------------------ |
-| **nvim-treesitter**             | Highlighting + auto-install parsers                    |
-| **nvim-treesitter-textobjects** | Select/swap/move by function, class, conditional, loop |
-| **nvim-ts-autotag**             | Auto-close HTML/JSX tags                               |
-| **nvim-various-textobjs**       | Repeatable `;` and `,` motions                         |
+| Plugin                          | What it does                                             |
+| ------------------------------- | -------------------------------------------------------- |
+| **nvim-treesitter**             | Highlighting + auto-install parsers                      |
+| **nvim-treesitter-textobjects** | Select/swap/move by function, class, conditional, loop   |
+| **nvim-ts-autotag**             | Auto-close HTML/JSX tags                                 |
+| **nvim-various-textobjs**       | 30+ extra text objects (subword, url, indentation, etc.) |
 
 ### UI
 
@@ -114,10 +114,10 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 
 ### Sessions
 
-| Plugin                     | What it does                                            |
-| -------------------------- | ------------------------------------------------------- |
-| **neovim-session-manager** | Manual session save/load/delete                         |
-| **auto-session**           | Auto session save/restore (auto-restore off by default) |
+| Plugin                     | What it does                                       |
+| -------------------------- | -------------------------------------------------- |
+| **neovim-session-manager** | Manual session save/load/delete                    |
+| **auto-session**           | Auto session save/restore (`<leader>as` to search) |
 
 ### Other
 
@@ -187,7 +187,7 @@ Leader is **Space**. This is not exhaustive — run `<leader>fk` or `<leader>?` 
 | Key                 | Action             |
 | ------------------- | ------------------ |
 | `<leader>hm`        | Mark file          |
-| `<leader>hn` / `hp` | Next / prev mark   |
+| `<leader>hn` / `hP` | Next / prev mark   |
 | `<leader>he`        | Remove mark        |
 | `<leader>hq`        | Marks in Telescope |
 
