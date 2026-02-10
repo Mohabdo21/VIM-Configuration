@@ -90,9 +90,7 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 | **noice** + **nvim-notify** + **nui** | Modern cmdline, messages, notifications       |
 | **which-key**                         | Keybinding popup                              |
 | **nvim-highlight-colors**             | Inline color rendering (hex, named, Tailwind) |
-| **nvim-colorizer**                    | Color code highlighting                       |
 | **mini.nvim**                         | Icons (mocks nvim-web-devicons)               |
-| **nvim-web-devicons**                 | Filetype icons                                |
 | **render-markdown**                   | Rich markdown rendering                       |
 
 ### Git
@@ -113,10 +111,9 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 
 ### Sessions
 
-| Plugin                     | What it does                                       |
-| -------------------------- | -------------------------------------------------- |
-| **neovim-session-manager** | Manual session save/load/delete                    |
-| **auto-session**           | Auto session save/restore (`<leader>as` to search) |
+| Plugin           | What it does                                         |
+| ---------------- | ---------------------------------------------------- |
+| **auto-session** | Session save/restore/delete (`<leader>as` to search) |
 
 ### Other
 
