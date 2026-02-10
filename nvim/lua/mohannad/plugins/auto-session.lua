@@ -14,9 +14,22 @@ return {
 			},
 			post_restore_cmds = {
 				function()
-					if package.loaded["nvim-tree.api"] then
-						require("nvim-tree.api").tree.open()
-					end
+					vim.schedule(function()
+						for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+							if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted then
+								local ft = vim.bo[buf].filetype
+								if ft and ft ~= "" then
+									vim.api.nvim_buf_call(buf, function()
+									vim.api.nvim_exec_autocmds("FileType", { pattern = ft })
+								end)
+								end
+							end
+						end
+
+						if package.loaded["nvim-tree.api"] then
+							require("nvim-tree.api").tree.open()
+						end
+					end)
 				end,
 			},
 		})
