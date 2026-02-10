@@ -18,7 +18,6 @@ Neovim 11 killed the need for these. They're removed:
 ```
 nvim/
 ├── init.lua                  Entry point: PATH, core requires, filetype rules
-├── coc-settings.json         CoC settings (disabled, kept for reference)
 └── lua/mohannad/
     ├── lazy.lua              lazy.nvim bootstrap, Python provider auto-detection
     ├── core/
@@ -286,6 +285,5 @@ chmod +x update_nvim.sh && ./update_nvim.sh
 ## Notes
 
 - Mason installs servers/formatters/linters on first launch. Just open Neovim.
-- CoC config exists in the tree but is disabled (`lazy = true`). Reference only.
 - Perl and Ruby providers are explicitly disabled.
 - This is a personal config. Fork it, gut it, make it yours.
