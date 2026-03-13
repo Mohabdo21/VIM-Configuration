@@ -24,6 +24,12 @@ return {
 			sql = { "sqlfluff" },
 		}
 
+		lint.linters.markdownlint.args = {
+			"--disable",
+			"MD013",
+			"--",
+		}
+
 		-- Customize the pylint linter
 		lint.linters.pylint.cmd = "python"
 		table.insert(lint.linters.pylint.args, 1, "pylint")
