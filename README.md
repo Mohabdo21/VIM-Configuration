@@ -26,7 +26,7 @@ nvim/
     │   ├── options.lua       Editor options
     │   └── diagnostics.lua   Diagnostic config (signs, floats, severity)
     └── plugins/
-        ├── init.lua          Always loaded: plenary, vim-tmux-navigator, copilot
+        ├── init.lua          Always loaded: plenary, vim-tmux-navigator
         ├── lsp/
         │   ├── lspconfig.lua Native LSP (vim.lsp.config/enable) + keymaps
         │   └── mason.lua     Mason: auto-install servers/tools
@@ -213,16 +213,16 @@ Leader is **Space**. This is not exhaustive — run `<leader>fk` or `<leader>?` 
 
 ### Optional
 
-| What                                        | Why                                                     |
-| ------------------------------------------- | ------------------------------------------------------- |
-| [**pyenv**](https://github.com/pyenv/pyenv) | Manage the `neovim-py` virtualenv (recommended)         |
-| [**nvm**](https://github.com/nvm-sh/nvm)    | Manage Node.js versions (recommended)                   |
-| **tmux**                                    | Only matters if you use vim-tmux-navigator              |
-| **Go**                                      | gopls, gofmt, golangci-lint                             |
-| **Rust** + `rustup component add rustfmt`   | rustfmt                                                 |
-| **luarocks**                                | Native Lua C modules (config adds luarocks to cpath)    |
-| **puppet-lint** (`gem install`)             | Not managed by Mason                                    |
-| **GitHub Copilot** subscription             | copilot.vim is always loaded; `:Copilot auth` to set up |
+| What                                        | Why                                                              |
+| ------------------------------------------- | ---------------------------------------------------------------- |
+| [**pyenv**](https://github.com/pyenv/pyenv) | Manage the `neovim-py` virtualenv (recommended)                  |
+| [**nvm**](https://github.com/nvm-sh/nvm)    | Manage Node.js versions (recommended)                            |
+| **tmux**                                    | Only matters if you use vim-tmux-navigator                       |
+| **Go**                                      | gopls, gofmt, golangci-lint                                      |
+| **Rust** + `rustup component add rustfmt`   | rustfmt                                                          |
+| **luarocks**                                | Native Lua C modules (config adds luarocks to cpath)             |
+| **puppet-lint** (`gem install`)             | Not managed by Mason                                             |
+| **GitHub Copilot** subscription             | copilot.vim lazy-loads on Insert mode; `:Copilot auth` to set up |
 
 Mason auto-installs most LSP servers, formatters, and linters. Exceptions: **pynvim** (pip), **puppet-lint** (gem), **gofmt** (ships with Go), **rustfmt** (rustup).
 
