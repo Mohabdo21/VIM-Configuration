@@ -61,7 +61,7 @@ return {
 					local buf = vim.api.nvim_get_current_buf()
 					local clients = vim.lsp.get_clients({ bufnr = buf })
 					for _, c in ipairs(clients) do
-						vim.lsp.stop_client(c.id)
+						c:stop()
 					end
 					vim.defer_fn(function()
 						vim.cmd("edit")
@@ -276,5 +276,33 @@ return {
 				},
 			},
 		})
+
+		-- Copilot (native LSP inline completion)
+		-- Requires: npm install --global @github/copilot-language-server
+		vim.lsp.config("copilot", {
+			cmd = { "copilot-language-server", "--stdio" },
+			root_markers = { ".git" },
+			init_options = {
+				editorInfo = { name = "Neovim", version = tostring(vim.version()) },
+				editorPluginInfo = { name = "Neovim", version = tostring(vim.version()) },
+			},
+		})
+		vim.lsp.enable("copilot")
+		vim.lsp.inline_completion.enable()
+
+		-- Accept inline completion with <M-l> (mirrors previous copilot.vim binding)
+		vim.keymap.set("i", "<M-l>", function()
+			if not vim.lsp.inline_completion.get() then
+				return "<M-l>"
+			end
+		end, { expr = true, silent = true, desc = "Accept inline completion" })
+
+		-- Cycle through inline completion candidates
+		vim.keymap.set("i", "<M-]>", function()
+			vim.lsp.inline_completion.select({ count = 1 })
+		end, { silent = true, desc = "Next inline completion" })
+		vim.keymap.set("i", "<M-[>", function()
+			vim.lsp.inline_completion.select({ count = -1 })
+		end, { silent = true, desc = "Previous inline completion" })
 	end,
 }
