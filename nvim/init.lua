@@ -25,5 +25,19 @@ vim.filetype.add({
 		["compose.yml"] = "yaml.docker-compose",
 		["compose.yaml"] = "yaml.docker-compose",
 		["Caddyfile"] = "caddy",
+		["go.work"] = "gowork",
+	},
+	pattern = {
+		-- Ansible: playbooks/, roles/, or files near ansible.cfg / .ansible-lint
+		[".*/playbooks/.*.ya?ml"] = "yaml.ansible",
+		[".*/roles/.*.ya?ml"] = "yaml.ansible",
+		[".*/handlers/.*.ya?ml"] = "yaml.ansible",
+		[".*/tasks/.*.ya?ml"] = "yaml.ansible",
+		-- Go templates
+		[".*.go%.tmpl"] = "gotmpl",
+		[".*.go%.html"] = "gotmpl",
+		[".*.gotmpl"] = "gotmpl",
+		-- Puppet manifests
+		[".*.pp"] = "puppet",
 	},
 })
