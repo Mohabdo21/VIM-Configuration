@@ -31,6 +31,12 @@ keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
+-- Remove __pycache__ directories
+keymap.set("n", "<leader>rp", function()
+	vim.fn.system('find . -type d -name "__pycache__" -exec rm -rf {} +')
+	vim.notify("Removed __pycache__ directories", vim.log.levels.INFO)
+end, { desc = "Remove __pycache__ directories" })
+
 -- Undo tree (native Neovim 0.12+, opt-in plugin)
 keymap.set("n", "<F5>", function()
 	vim.cmd.packadd("nvim.undotree")
