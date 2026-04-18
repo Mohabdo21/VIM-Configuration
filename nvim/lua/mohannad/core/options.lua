@@ -46,9 +46,10 @@ opt.splitbelow = true
 -- Swap
 opt.swapfile = false
 
--- Folding
-opt.foldmethod = "syntax"
-opt.foldlevel = 0
+-- Folding (treesitter-based)
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99
 
 -- Scrolling
 opt.scrolljump = 5
@@ -69,3 +70,10 @@ opt.showmatch = true
 
 -- Virtual block editing
 opt.virtualedit = "block"
+
+-- Native treesitter highlighting for any filetype with an available parser
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
+})
