@@ -16,6 +16,7 @@ return {
 
 		-- enable mason and configure icons
 		mason.setup({
+			PATH = "skip",
 			ui = {
 				icons = {
 					package_installed = "✓",

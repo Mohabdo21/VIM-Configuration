@@ -11,6 +11,10 @@
 -- Ensure Mason bin is in PATH early so linters/formatters are found
 vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 
+-- nvim-tree recommends disabling netrw before any plugin setup.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 require("mohannad.core")
 require("mohannad.lazy")
 

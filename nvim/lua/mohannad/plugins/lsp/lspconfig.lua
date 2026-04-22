@@ -277,7 +277,7 @@ return {
 			},
 		})
 
-		-- Copilot (native LSP inline completion)
+		-- ── Copilot (native LSP inline completion) ──────────────────────
 		-- Requires: npm install --global @github/copilot-language-server
 		vim.lsp.config("copilot", {
 			cmd = { "copilot-language-server", "--stdio" },

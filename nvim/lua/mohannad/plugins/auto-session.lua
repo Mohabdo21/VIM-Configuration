@@ -20,15 +20,13 @@ return {
 								local ft = vim.bo[buf].filetype
 								if ft and ft ~= "" then
 									vim.api.nvim_buf_call(buf, function()
-									vim.api.nvim_exec_autocmds("FileType", { pattern = ft })
-								end)
+										vim.api.nvim_exec_autocmds("FileType", { pattern = ft })
+									end)
 								end
 							end
 						end
 
-						if package.loaded["nvim-tree.api"] then
-							require("nvim-tree.api").tree.open()
-						end
+						pcall(vim.cmd, "NvimTreeOpen")
 					end)
 				end,
 			},

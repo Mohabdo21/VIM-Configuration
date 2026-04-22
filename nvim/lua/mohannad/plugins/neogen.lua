@@ -1,5 +1,36 @@
 return {
 	"danymat/neogen",
+	cmd = "Neogen",
+	keys = {
+		{
+			"<leader>nf",
+			function()
+				require("neogen").generate()
+			end,
+			desc = "Generate function documentation",
+		},
+		{
+			"<leader>nc",
+			function()
+				require("neogen").generate({ type = "class" })
+			end,
+			desc = "Generate class documentation",
+		},
+		{
+			"<leader>nt",
+			function()
+				require("neogen").generate({ type = "type" })
+			end,
+			desc = "Generate type documentation",
+		},
+		{
+			"<leader>nn",
+			function()
+				require("neogen").generate({ type = "file" })
+			end,
+			desc = "Generate file documentation",
+		},
+	},
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	config = function()
 		require("neogen").setup({
@@ -63,33 +94,5 @@ return {
 				},
 			},
 		})
-
-		-- Set Neogen keymaps
-		local keymap = vim.keymap -- for conciseness
-
-		keymap.set(
-			"n",
-			"<leader>nf",
-			":lua require('neogen').generate()<CR>",
-			{ noremap = true, silent = true, desc = "Generate function documentation" }
-		)
-		keymap.set(
-			"n",
-			"<leader>nc",
-			":lua require('neogen').generate({ type = 'class' })<CR>",
-			{ noremap = true, silent = true, desc = "Generate class documentation" }
-		)
-		keymap.set(
-			"n",
-			"<leader>nt",
-			":lua require('neogen').generate({ type = 'type' })<CR>",
-			{ noremap = true, silent = true, desc = "Generate type documentation" }
-		)
-		keymap.set(
-			"n",
-			"<leader>nn",
-			":lua require('neogen').generate({ type = 'file' })<CR>",
-			{ noremap = true, silent = true, desc = "Generate file documentation" }
-		)
 	end,
 }
