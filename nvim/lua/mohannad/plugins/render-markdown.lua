@@ -143,5 +143,17 @@ return {
 			above = 0,
 			below = 0,
 		},
+		latex = {
+			enabled = true,
+			-- Converter used to turn LaTeX into Unicode
+			converter = { "pylatexenc", "latex2text" },
+			-- Position relative to the block: 'above', 'below', or 'center'
+			position = "below",
+			-- Highlight group for the rendered LaTeX
+			highlight = "RenderMarkdownMath",
+			-- Padding around the rendered block
+			top_pad = 0,
+			bottom_pad = 0,
+		},
 	},
 }
