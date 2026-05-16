@@ -277,6 +277,33 @@ return {
 			},
 		})
 
+		setup("rust_analyzer", {
+			cmd = { "rust-analyzer" },
+			filetypes = { "rust" },
+			root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+			capabilities = (function()
+				local rust_capabilities = vim.deepcopy(capabilities)
+				rust_capabilities.workspace = rust_capabilities.workspace or {}
+				rust_capabilities.workspace.didChangeWatchedFiles = {
+					dynamicRegistration = false,
+				}
+				return rust_capabilities
+			end)(),
+			settings = {
+				["rust-analyzer"] = {
+					files = {
+						excludeDirs = { "target" },
+					},
+					cargo = {
+						allFeatures = true,
+					},
+					check = {
+						command = "clippy",
+					},
+				},
+			},
+		})
+
 		-- ── Copilot (native LSP inline completion) ──────────────────────
 		-- Requires: npm install --global @github/copilot-language-server
 		vim.lsp.config("copilot", {

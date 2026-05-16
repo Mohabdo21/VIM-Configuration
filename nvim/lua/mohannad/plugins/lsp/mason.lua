@@ -42,6 +42,7 @@ return {
 				"markdown_oxide", -- Markdown
 				"puppet", -- Puppet
 				"gopls", -- Go
+				"rust_analyzer", -- Rust
 				"ts_ls", -- TypeScript
 				"typos_lsp", -- Typo checking
 				"ansiblels", -- Ansible
