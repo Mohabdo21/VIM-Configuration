@@ -306,16 +306,16 @@ return {
 
 		-- ── Copilot (native LSP inline completion) ──────────────────────
 		-- Requires: npm install --global @github/copilot-language-server
-		vim.lsp.config("copilot", {
-			cmd = { "copilot-language-server", "--stdio" },
-			root_markers = { ".git" },
-			init_options = {
-				editorInfo = { name = "Neovim", version = tostring(vim.version()) },
-				editorPluginInfo = { name = "Neovim", version = tostring(vim.version()) },
-			},
-		})
-		vim.lsp.enable("copilot")
-		vim.lsp.inline_completion.enable()
+		-- vim.lsp.config("copilot", {
+		-- 	cmd = { "copilot-language-server", "--stdio" },
+		-- 	root_markers = { ".git" },
+		-- 	init_options = {
+		-- 		editorInfo = { name = "Neovim", version = tostring(vim.version()) },
+		-- 		editorPluginInfo = { name = "Neovim", version = tostring(vim.version()) },
+		-- 	},
+		-- })
+		-- vim.lsp.enable("copilot")
+		-- vim.lsp.inline_completion.enable()
 
 		-- Accept inline completion with <M-l> (mirrors previous copilot.vim binding)
 		vim.keymap.set("i", "<M-l>", function()

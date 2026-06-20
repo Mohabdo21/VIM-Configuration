@@ -9,7 +9,7 @@ return {
 		local swap = require("nvim-treesitter-textobjects.swap")
 		local move = require("nvim-treesitter-textobjects.move")
 
-		-- Configuration (behavior only — keymaps are explicit below)
+		-- Configuration (behavior only - keymaps are explicit below)
 		ts_textobjects.setup({
 			select = {
 				lookahead = true,

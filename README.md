@@ -53,8 +53,8 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 
 | Plugin           | What it does                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------------------- |
-| **conform.nvim** | Format on save — prettier, eslint_d, stylua, isort, black, clang-format, shfmt, sqlfmt, gofmt, rustfmt  |
-| **nvim-lint**    | Async lint — eslint_d, pylint, golangci-lint, puppet-lint, shellcheck, markdownlint, yamllint, sqlfluff |
+| **conform.nvim** | Format on save - prettier, eslint_d, stylua, isort, black, clang-format, shfmt, sqlfmt, gofmt, rustfmt  |
+| **nvim-lint**    | Async lint - eslint_d, pylint, golangci-lint, puppet-lint, shellcheck, markdownlint, yamllint, sqlfluff |
 
 ### Navigation
 
@@ -83,7 +83,7 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 | Plugin                                | What it does                                  |
 | ------------------------------------- | --------------------------------------------- |
 | **github-nvim-theme**                 | Colorscheme (`github_dark_default`)           |
-| **lualine**                           | Statusline — mode colors, diagnostics, clock  |
+| **lualine**                           | Statusline - mode colors, diagnostics, clock  |
 | **bufferline**                        | Tab bar with LSP diagnostics                  |
 | **alpha-nvim**                        | Dashboard                                     |
 | **nvim-tree**                         | File explorer                                 |
@@ -127,7 +127,7 @@ LSP is configured natively with `vim.lsp.config()` + `vim.lsp.enable()`. No nvim
 
 ## Key Bindings
 
-Leader is **Space**. This is not exhaustive — run `<leader>fk` or `<leader>?` to see everything.
+Leader is **Space**. This is not exhaustive - run `<leader>fk` or `<leader>?` to see everything.
 
 ### General
 

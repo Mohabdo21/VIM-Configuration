@@ -10,7 +10,7 @@ return {
 	config = function()
 		local cmp = require("cmp")
 
-		-- Kind icons (replaces lspkind.nvim) — using built-in CompletionItemKind symbols
+		-- Kind icons (replaces lspkind.nvim) - using built-in CompletionItemKind symbols
 		local kind_icons = {
 			Text = "󰉿",
 			Method = "󰆧",
