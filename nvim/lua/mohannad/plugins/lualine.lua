@@ -110,7 +110,15 @@ return {
 					{ "filetype" },
 				},
 				lualine_y = { "progress" },
-				lualine_z = { "location" },
+				lualine_z = {
+					"location",
+					{
+						require("opencode").statusline,
+						cond = function()
+							return package.loaded["opencode"] and require("opencode").statusline
+						end,
+					},
+				},
 			},
 			inactive_sections = {
 				lualine_a = {},
