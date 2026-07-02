@@ -59,17 +59,20 @@ return {
 			},
 			filters = {
 				custom = { ".DS_Store" },
+				git_ignored = false,
 			},
 			git = {
-				ignore = false,
+				enable = true,
 			},
 			-- update the working directory to the directory of the opened file
-			update_cwd = true,
+			sync_root_with_cwd = true,
 			-- update the focused file
 			update_focused_file = {
 				enable = true,
-				update_cwd = true,
-				ignore_list = {},
+				update_root = {
+					enable = true,
+					ignore_list = {},
+				},
 			},
 		})
 	end,
