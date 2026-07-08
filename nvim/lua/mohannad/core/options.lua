@@ -32,6 +32,8 @@ opt.cursorline = false
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
+opt.winborder = "rounded"
+opt.pumborder = "rounded"
 
 -- Backspace
 opt.backspace = "indent,eol,start"

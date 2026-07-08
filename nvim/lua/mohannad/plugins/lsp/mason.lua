@@ -26,49 +26,51 @@ return {
 			},
 		})
 
+		local servers = vim.list.unique({
+			"html", -- HTML
+			"cssls", -- CSS
+			"tailwindcss", -- Tailwind CSS
+			"lua_ls", -- Lua
+			"pyright", -- Python
+			"bashls", -- Bash
+			"clangd", -- C/C++
+			"dockerls", -- Dockerfile
+			"docker_compose_language_service", -- Docker Compose
+			"jsonls", -- JSON
+			"markdown_oxide", -- Markdown
+			"puppet", -- Puppet
+			"gopls", -- Go
+			"rust_analyzer", -- Rust
+			"ts_ls", -- TypeScript
+			"typos_lsp", -- Typo checking
+			"ansiblels", -- Ansible
+			"tinymist", -- Typst
+		})
+
 		mason_lspconfig.setup({
-			-- list of servers for mason to install
-			ensure_installed = {
-				"html", -- HTML
-				"cssls", -- CSS
-				"tailwindcss", -- Tailwind CSS
-				"lua_ls", -- Lua
-				"pyright", -- Python
-				"bashls", -- Bash
-				"clangd", -- C/C++
-				"dockerls", -- Dockerfile
-				"docker_compose_language_service", -- Docker Compose
-				"jsonls", -- JSON
-				"markdown_oxide", -- Markdown
-				"puppet", -- Puppet
-				"gopls", -- Go
-				"rust_analyzer", -- Rust
-				"ts_ls", -- TypeScript
-				"typos_lsp", -- Typo checking
-				"ansiblels", -- Ansible
-				"tinymist", -- Typst
-			},
-			-- auto-install configured servers (with lspconfig)
-			automatic_enable = false, -- not the same as ensure_installed
+			ensure_installed = servers,
+			automatic_enable = false,
+		})
+
+		local tools = vim.list.unique({
+			"prettier", -- Code formatter
+			"stylua", -- Lua formatter
+			"isort", -- Python formatter
+			"black", -- Python formatter
+			"pylint", -- Python linter
+			"eslint_d", -- JavaScript/TypeScript linter
+			"shfmt", -- Shell formatter
+			"clang-format", -- C/C++ formatter
+			"shellcheck", -- Shell linter
+			"markdownlint", -- Markdown linter
+			"yamllint", -- YAML linter
+			"golangci-lint", -- Go linter
+			"sqlfluff", -- SQL linter
+			"sqlfmt", -- SQL formatter
 		})
 
 		mason_tool_installer.setup({
-			ensure_installed = {
-				"prettier", -- Code formatter
-				"stylua", -- Lua formatter
-				"isort", -- Python formatter
-				"black", -- Python formatter
-				"pylint", -- Python linter
-				"eslint_d", -- JavaScript/TypeScript linter
-				"shfmt", -- Shell formatter
-				"clang-format", -- C/C++ formatter
-				"shellcheck", -- Shell linter
-				"markdownlint", -- Markdown linter
-				"yamllint", -- YAML linter
-				"golangci-lint", -- Go linter
-				"sqlfluff", -- SQL linter
-				"sqlfmt", -- SQL formatter
-			},
+			ensure_installed = tools,
 		})
 	end,
 }

@@ -9,7 +9,7 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			local treesitter = require("nvim-treesitter")
-			local parsers = {
+			local parsers = vim.list.unique({
 				"json",
 				"javascript",
 				"typescript",
@@ -31,7 +31,7 @@ return {
 				"regex",
 				"go",
 				"htmldjango",
-			}
+			})
 
 			treesitter.setup({})
 			treesitter.install(parsers)
