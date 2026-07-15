@@ -59,6 +59,7 @@ return {
 			"black", -- Python formatter
 			"pylint", -- Python linter
 			"eslint_d", -- JavaScript/TypeScript linter
+			"oxlint", -- JavaScript/TypeScript linter
 			"shfmt", -- Shell formatter
 			"clang-format", -- C/C++ formatter
 			"shellcheck", -- Shell linter

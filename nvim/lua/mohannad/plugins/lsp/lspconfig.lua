@@ -189,6 +189,11 @@ return {
 			cmd = { "typescript-language-server", "--stdio" },
 			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 			root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+			init_options = {
+				tsserver = {
+					path = vim.fn.expand("~/.local/share/tsserver-5/node_modules/typescript/lib/tsserver.js"),
+				},
+			},
 			settings = {
 				typescript = ts_lang_settings,
 				javascript = ts_lang_settings,

@@ -11,10 +11,10 @@ return {
 		-- Set up the 'lint' module
 		lint.linters_by_ft = {
 			-- Specify the linters for each file type
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
+			javascript = { "oxlint" },
+			typescript = { "oxlint" },
+			javascriptreact = { "oxlint" },
+			typescriptreact = { "oxlint" },
 			python = { "pylint" },
 			go = { "golangcilint" },
 			puppet = { "puppet-lint" },

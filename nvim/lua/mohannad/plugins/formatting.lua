@@ -12,10 +12,10 @@ return {
 		conform.setup({
 			-- Specify the formatters for each file type
 			formatters_by_ft = {
-				javascript = { "prettier", "eslint_d" }, -- Added eslint_d for JavaScript
-				typescript = { "prettier", "eslint_d" }, -- Added eslint_d for TypeScript
-				javascriptreact = { "prettier", "eslint_d" }, -- Added eslint_d for JSX
-				typescriptreact = { "prettier", "eslint_d" }, -- Added eslint_d for TSX
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
