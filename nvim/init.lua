@@ -1,12 +1,6 @@
--- Configure first with:
--- pyenv install -s 3.12.3
--- pyenv virtualenv 3.12.3 neovim-py
--- pyenv activate neovim-py
--- pip install --upgrade pip
--- pip install --upgrade pynvim
--- python -c "import pynvim, sys; print('pynvim', pynvim.__version__, 'python', sys.executable)"
-
--- Python provider is configured dynamically in lua/mohannad/lazy.lua
+-- Python provider uses system python with pynvim (see lua/mohannad/lazy.lua)
+-- Node provider uses bun-installed neovim package
+vim.g.node_host_prog = vim.fn.expand("~/.cache/.bun/bin/neovim-node-host")
 
 -- Ensure Mason bin is in PATH early so linters/formatters are found
 vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH

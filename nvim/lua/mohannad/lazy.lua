@@ -24,8 +24,8 @@ local function get_python_venv()
 		os.getenv("VIRTUAL_ENV") and os.getenv("VIRTUAL_ENV") .. "/bin/python",
 		-- Project virtual environment
 		vim.fn.getcwd() .. "/.venv/bin/python",
-		-- Global virtual environment
-		vim.fn.expand("~/.pyenv/versions/neovim-py/bin/python"),
+		-- uv tool pynvim (system python has pynvim)
+		"/usr/bin/python3",
 		-- System Python (found via PATH)
 		vim.fn.exepath("python3") ~= "" and vim.fn.exepath("python3") or nil,
 	}
